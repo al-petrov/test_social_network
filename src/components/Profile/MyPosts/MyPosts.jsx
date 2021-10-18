@@ -3,7 +3,8 @@ import p from './MyPosts.module.css';
 import Post from "./Post/Post";
 
 
-const MyPost = () => {
+const MyPost = (props) => {
+
   return (
     <div>
 
@@ -16,7 +17,7 @@ const MyPost = () => {
         </div>
 
         <div className={p.content}>
-          <Post />
+          <Post message='Привет как дела?' likeCount='12'/>
           <Post />
           <Post />
           <Post />
