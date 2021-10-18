@@ -18,7 +18,7 @@ const MyPost = (props) => {
 
         <div className={p.content}>
           <Post message='Привет как дела?' likeCount='12'/>
-          <Post />
+          <Post message='my first post' likeCount='111'/>
           <Post />
           <Post />
           <Post />

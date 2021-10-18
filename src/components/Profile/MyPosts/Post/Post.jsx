@@ -6,9 +6,9 @@ const Post = (props) => {
     <div className={p.item}>
       <img src='https://klike.net/uploads/posts/2019-03/1551511801_1.jpg'></img>
       {props.message}
-      <div>
+      <div className={p.likes}>
         <img src="https://image.flaticon.com/icons/png/512/1239/1239282.png"></img>
-        {props.likeCount + " "}
+        { props.likeCount + " " }
         {/* <img src="images/heart.png"></img> */}
         <span>like</span>
       </div>
