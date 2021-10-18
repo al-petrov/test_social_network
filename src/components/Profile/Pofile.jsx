@@ -5,10 +5,10 @@ import MyPost from './MyPosts/MyPosts';
 const Profile = () => {
     return (
     <div>
-    <div>
-      <img src='https://media-exp1.licdn.com/dms/image/C4D1BAQGDmALg_8s-Yg/company-background_10000/0/1519799119530?e=2159024400&v=beta&t=4WV9YKR9L3PAEnppWmPPMk5xVnETtWvhZN8NexEzPwM'></img>  
+    <div className={p.content}>
+      <img src='https://premiya.vidatiknigu.com.ua/wp-content/uploads/2021/02/odinochestvo_chelovek_zakat_132970_300x168.jpg'></img>  
     </div>
-    <div>
+    <div className={p.content}>
       ava + description
     </div>
     <MyPost />
