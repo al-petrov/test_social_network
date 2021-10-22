@@ -1,5 +1,6 @@
 .header{
     grid-area: h;
+    background: linear-gradient(green, springgreen);
     background-color: green;
   }
   
