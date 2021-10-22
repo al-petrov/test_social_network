@@ -6,8 +6,7 @@ import Post from "./Post/Post";
 const MyPost = (props) => {
 
   return (
-    <div>
-
+    <div className={p.postsBlock}>
       <div>
         My posts
         <div>

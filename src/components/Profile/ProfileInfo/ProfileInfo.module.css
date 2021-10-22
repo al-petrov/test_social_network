@@ -1,0 +1,10 @@
+.descriptionBlock {
+    background-color: aqua;
+    margin: 0px 0px 0px 10px;
+    /* padding: 10px; */
+}
+
+.profileHeader img {
+    width: 1000px;
+    height: 170px;
+}

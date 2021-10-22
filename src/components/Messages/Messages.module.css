@@ -13,13 +13,18 @@
     color: red;
 }
 
+.dialog {
+    padding: 10px;
+}
+
 .dialog a {
-    color: white;
+    color: black;
     text-decoration: none;
+    
 }
 
 .dialog a.activeLink {
-    color: darkblue;   
+    color: white;   
 }
 
 .messages {
@@ -27,5 +32,5 @@
 }
 
 .message {
-
+    padding: 25px;
 }

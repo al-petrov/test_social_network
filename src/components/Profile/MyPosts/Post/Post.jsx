@@ -1,16 +1,20 @@
 import React from "react";
 import p from './Post.module.css';
+import heart from "./postImages/heart.png"
 
 const Post = (props) => {
+  let likes = '';
+  if (props.likeCount) {
+    likes = props.likeCount + " like";
+  }
+
   return (
     <div className={p.item}>
       <img src='https://klike.net/uploads/posts/2019-03/1551511801_1.jpg'></img>
       {props.message}
       <div className={p.likes}>
-        <img src="https://image.flaticon.com/icons/png/512/1239/1239282.png"></img>
-        { props.likeCount + " " }
-        {/* <img src="images/heart.png"></img> */}
-        <span>like</span>
+        <img src={heart}></img> 
+        {likes}
       </div>
     </div>
   )
