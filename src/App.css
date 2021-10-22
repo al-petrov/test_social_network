@@ -15,7 +15,7 @@
 
 .app-wrapper-content {
   grid-area: c;
-  background-color: linear-gradient(to bottom, blue, pink, blue);
+  background: linear-gradient(to bottom, blue, pink, blue);
   margin-top: 3px;
 }
 
