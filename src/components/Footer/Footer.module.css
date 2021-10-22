@@ -1,0 +1,10 @@
+.header{
+    grid-area: f;
+    background: linear-gradient(green, springgreen);
+    background-color: green;
+  }
+  
+  .header img {
+    width: 20px;
+  }
+  

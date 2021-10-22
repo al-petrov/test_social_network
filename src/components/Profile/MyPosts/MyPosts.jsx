@@ -2,25 +2,24 @@ import React from "react";
 import p from './MyPosts.module.css';
 import Post from "./Post/Post";
 
-
 const MyPost = (props) => {
+
+  let allPosts = props.data.map(p => <Post message={p.text} likeCount={p.likeCount} />)
 
   return (
     <div className={p.postsBlock}>
       <div>
-        My posts
+        <h3>My posts</h3>
         <div>
           <textarea></textarea>
-          <button>Add post</button>
-          <button>Remove</button>
+          <div>
+            <button>Add post</button>
+            <button>Remove</button>
+          </div>
         </div>
 
         <div className={p.content}>
-          <Post message='Привет как дела?' likeCount='12'/>
-          <Post message='my first post' likeCount='111'/>
-          <Post />
-          <Post />
-          <Post />
+          {allPosts}
         </div>
       </div>
     </div>
