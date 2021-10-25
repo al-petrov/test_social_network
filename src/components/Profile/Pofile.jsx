@@ -1,17 +1,20 @@
 import React from "react";
-// import p from './Profile.module.css';
+import p from './Profile.module.css';
 import MyPost from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/PofileInfo";
 
 const Profile = (props) => {
 
-  let myPosts = props.data;
-  debugger;
+  let myPosts = props.posts;
 
   return (
     <div>
-      <ProfileInfo />
-      <MyPost data={myPosts} />
+      <div className={p.profileWrapper}>
+        <ProfileInfo />
+      </div>
+      <div className={p.postsWrapper}>
+        <MyPost myPosts={myPosts} addPost={props.addPost} addSimbolNewPost={props.addSimbolNewPost} />
+      </div>
     </div>)
 }
 

@@ -1,0 +1,18 @@
+.blockWithScroll {
+    
+}
+
+.postsWrapper {
+    height: 56vh;
+    /* background-color: aliceblue; */
+    overflow-y: scroll;
+    background-color: rgba(36, 49, 56, 0.8);
+    /* opacity: .3; */
+}
+
+.profileWrapper {
+    height: auto;
+    /* background-color: aliceblue; */
+    background-color: rgba(36, 49, 56, 0.8);
+    /* opacity: .3; */
+}
