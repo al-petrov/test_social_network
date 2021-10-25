@@ -1,3 +1,13 @@
-.messages {
+.myMessages {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    justify-items: end;
+}
 
+.yourMessages {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    justify-items: start;
 }

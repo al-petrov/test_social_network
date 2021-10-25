@@ -8,10 +8,16 @@ const MyMessages = (props) => {
     let myDataMessage = props.data.messagesData;
     let myDataDialogs = props.data.dialogsData;
 
+    let senderID = window.location.pathname.substring(10, window.location.pathname.length);
+
     return (
         <div className={m.dialogs}>
-            <Dialogs data={myDataDialogs} />
-            <Messages data={myDataMessage} />
+            <div className={m.dialogsBar}>
+                <Dialogs data={myDataDialogs} />
+            </div>
+            <div className={m.messages}>
+                <Messages data={myDataMessage} senderID={senderID} myID={props.myID} />
+            </div>
         </div>
     )
 }

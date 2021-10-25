@@ -10,12 +10,16 @@ let dialogsData = [
   ]
   
   let messagesData = [
-    {id: 1, senderId: 1, message: 'hi'},
-    {id: 2, senderId: 1, message: 'how are you'},
-    {id: 3, senderId: 5, message: 'YO'},
-    {id: 4, senderId: 3, message: 'fuck'},
-    {id: 5, senderId: 3, message: 'you'},
-    {id: 6, senderId: 3, message: 'YO'},
+    {id: 1, senderId: "1", getterId: "999", message: 'hi', date: new Date(2021, 1, 1, 12, 24, 4)},
+    {id: 2, senderId: "1", getterId: "999", message: 'how are you', date: new Date(2021, 1, 1, 12, 25, 0)},
+    
+    {id: 1, senderId: "999", getterId: "1", message: 'hi', date: new Date(2021, 1, 1, 12, 24, 20)},
+    {id: 2, senderId: "999", getterId: "1", message: 'i\'m fine', date: new Date(2021, 1, 1, 12, 25, 43)},
+
+    {id: 3, senderId: "5", getterId: "999", message: 'YO', date: new Date(2021, 1, 1, 12, 24, 4)},
+    {id: 4, senderId: "3", getterId: "999",message: 'fuck', date: new Date(2021, 1, 1, 12, 24, 4)},
+    {id: 5, senderId: "3", getterId: "999",message: 'you', date: new Date(2021, 1, 1, 12, 24, 4)},
+    {id: 6, senderId: "3", getterId: "999",message: 'YO', date: new Date(2021, 1, 1, 12, 24, 4)},
   ]
   
   let allMessages = {
@@ -42,6 +46,7 @@ let dialogsData = [
   let state = {
     messages: allMessages,
     profilePage : profilePage,
+    myID: "999",
   };
 
   window.state = state;

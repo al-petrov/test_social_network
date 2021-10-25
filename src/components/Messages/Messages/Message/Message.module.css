@@ -1,3 +1,11 @@
 .message {
-    padding: 25px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: 10px;
+    background-color: rgba(216, 198, 198, 0.637);
+    width: 200px;
+    border-radius: 25px;
+    margin: 20px 20px 20px 20px;
+    justify-items: end;    
 }

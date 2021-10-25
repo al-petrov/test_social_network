@@ -6,7 +6,7 @@
   "n c"
   "f f";
 
-  grid-template-rows: 60px auto 40px;
+  grid-template-rows: 5vh auto 0px;
   grid-template-columns: 2fr 10fr;
   /* gap: 10px; */
 
@@ -17,12 +17,9 @@
 
 .app-wrapper-content {
   grid-area: c;
-  /* background: linear-gradient(to bottom, blue, pink, blue); */
-  margin-top: 3px;
-  box-sizing: border-box;
-  min-height: 100%;
-  /* overflow-y: scroll; */
-  padding-bottom: 90px;
+  background-color: rgba(36, 49, 56, 0.8);
+  overflow-y: scroll;
+  /* padding-bottom: 0px; */
 }
 
 .wholePage {

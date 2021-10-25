@@ -1,36 +1,14 @@
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    align-items: end;
 }
 
-.dialogItems {
-    
-    padding: 25px;
-  
-}
-
-.dialogItems .active {
-    color: red;
-}
-
-.dialog {
-    padding: 10px;
-}
-
-.dialog a {
-    color: black;
-    text-decoration: none;
-    
-}
-
-.dialog a.activeLink {
-    color: white;   
+.dialogsBar {
+    background-color: rgba(216, 198, 198, 0.637);
+    height: 95vh;
 }
 
 .messages {
-
-}
-
-.message {
-    padding: 25px;
+    
 }

@@ -23,7 +23,7 @@ const App = (props) => {
                     <Header />
                     <Navbar />
                     <div className='app-wrapper-content'>
-                        <Route path='/messages' render={ () => <MyMessages data={myDataMessages} />} />
+                        <Route path='/messages' render={ () => <MyMessages data={myDataMessages} myID = {props.data.myID}/>} />
                         <Route path='/profile'  render={ () => <Profile posts={myDataPosts} addPost={props.addPost} addSimbolNewPost={props.addSimbolNewPost}/>} />
                         <Route path='/news'  render={ () => <News />} />
                         <Route path='/music'  render={ () => <Music />} />
@@ -36,7 +36,7 @@ const App = (props) => {
                         <Route path='/music' component={Music} />
                         <Route path='/settings' component={Settings} />  */}
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             </div>
         </BrowserRouter>
