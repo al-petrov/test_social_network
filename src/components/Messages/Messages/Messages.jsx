@@ -9,7 +9,8 @@ const Messages = (props) => {
 
     let sendMessage = () => {
         let text = currentMessageInput.current.value;
-        alert(text);
+        debugger;
+        props.sendMessage(text, props.senderID);
     }
 
     let currentMessages = [];
@@ -42,22 +43,30 @@ const Messages = (props) => {
             </div>
         )
     });
+
+    let onMessageChange = () => {
+        let text = currentMessageInput.current.value;
+        props.addSimbolNewMessage(text, props.senderID);
+    }
+
     // let messageElements = props.data.map(message => <Message id={message.id} message={message.message} />);
 
     // let messageElements = props.data.map(message => <Route path={'/messages/' + message.senderId} 
     //    render={ () => <Message id={message.id} message={message.message} />} />);
 
 
-    let currentMessageInput = React.createRef();
+     let currentMessageInput = React.createRef();
     return (
         // <BrowserRouter>
         <div className={m.messages}>
             <div>
                 {messageElements}
             </div>
-            <textarea ref={currentMessageInput} className={m.newMessageField}></textarea>
+            <div>
+            <textarea onChange={onMessageChange} ref={currentMessageInput} className={m.newMessageField} value={props.textNewMessages}/>
             {/* <div className={m.newMessage}> */}
-                <button onClick={sendMessage} className={m.newMessage}>send</button>
+            <button onClick={sendMessage} className={m.newMessage}>send</button>
+            </div>
             {/* </div> */}
         </div>
 

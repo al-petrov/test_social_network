@@ -11,7 +11,6 @@ import Footer from './components/Footer/Footer';
 
 
 const App = (props) => {
-    debugger;
     let myDataMessages = props.data.messages;
     let myDataPosts = props.data.profilePage;
     return (
@@ -23,7 +22,7 @@ const App = (props) => {
                     <Header />
                     <Navbar />
                     <div className='app-wrapper-content'>
-                        <Route path='/messages' render={ () => <MyMessages data={myDataMessages} myID = {props.data.myID}/>} />
+                        <Route path='/messages' render={ () => <MyMessages data={myDataMessages} myID = {props.data.myID} addSimbolNewMessage = {props.addSimbolNewMessage} sendMessage={props.sendMessage} />} />
                         <Route path='/profile'  render={ () => <Profile posts={myDataPosts} addPost={props.addPost} addSimbolNewPost={props.addSimbolNewPost}/>} />
                         <Route path='/news'  render={ () => <News />} />
                         <Route path='/music'  render={ () => <Music />} />
