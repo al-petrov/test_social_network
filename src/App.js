@@ -11,7 +11,7 @@ import Footer from './components/Footer/Footer';
 
 
 const App = (props) => {
-
+    debugger;
     let myDataMessages = props.data.messages;
     let myDataPosts = props.data.profilePage;
     return (

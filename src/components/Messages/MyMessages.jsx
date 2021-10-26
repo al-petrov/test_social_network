@@ -11,7 +11,7 @@ const MyMessages = (props) => {
     let senderID = window.location.pathname.substring(10, window.location.pathname.length);
 
     return (
-        <div className={m.dialogs}>
+        <div className={m.myMessages}>
             <div className={m.dialogsBar}>
                 <Dialogs data={myDataDialogs} />
             </div>

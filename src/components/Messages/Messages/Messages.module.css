@@ -1,13 +1,37 @@
 .myMessages {
+    /* grid-area: n; */
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr ;
     justify-items: end;
 }
 
 .yourMessages {
+    /* grid-area: e; */
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     justify-items: start;
+}
+
+.messages {
+    display: grid;
+    grid-template-rows: 10fr 5fr;
+    grid-template-columns: 1fr;
+    justify-items:center;
+   
+    /* grid-area: n; */
+}
+
+.newMessage{
+    
+}
+
+.newMessageField {
+    background: transparent;
+    min-width: 60%;
+    max-width: 80%;
+    max-height: 100px;
+    border-radius: 10px;
+    font-size: large;
 }

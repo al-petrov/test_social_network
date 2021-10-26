@@ -1,7 +1,7 @@
-.dialogs {
+.myMessages {
     display: grid;
     grid-template-columns: 2fr 10fr;
-    align-items: end;
+    /* align-items: end; */
 }
 
 .dialogsBar {
@@ -10,5 +10,8 @@
 }
 
 .messages {
-    
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: ifr;
+    align-items: end;
 }

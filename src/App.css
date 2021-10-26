@@ -3,14 +3,13 @@
   display: grid;
   grid-template-areas: 
   "h h"
-  "n c"
-  "f f";
+  "n c";
 
-  grid-template-rows: 5vh auto 0px;
+  grid-template-rows: 5vh auto;
   grid-template-columns: 2fr 10fr;
   /* gap: 10px; */
 
-  width: 150vh;
+  width: 100%;
   height: 100vh;
  
 }

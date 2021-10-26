@@ -51,14 +51,14 @@ const Messages = (props) => {
     let currentMessageInput = React.createRef();
     return (
         // <BrowserRouter>
-        <div>
-            <div className={m.messages}>
+        <div className={m.messages}>
+            <div>
                 {messageElements}
             </div>
-            <textarea ref={currentMessageInput}></textarea>
-            <div>
-                <button onClick={sendMessage}>send</button>
-            </div>
+            <textarea ref={currentMessageInput} className={m.newMessageField}></textarea>
+            {/* <div className={m.newMessage}> */}
+                <button onClick={sendMessage} className={m.newMessage}>send</button>
+            {/* </div> */}
         </div>
 
         // </BrowserRouter>
