@@ -16,7 +16,7 @@
 
 .messages {
     display: grid;
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 10fr 5fr;
     grid-template-columns: 1fr;
     justify-items:center;
     align-items: end;
@@ -40,4 +40,9 @@
     max-height: 300px;
     border-radius: 10px;
     font-size: x-large;
+}
+
+.messageList {
+    height: 100%;
+ 
 }

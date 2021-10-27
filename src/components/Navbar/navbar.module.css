@@ -3,14 +3,30 @@
     background:hsla(120, 86%, 11%, 0.9) ;
     /* background-color: rgb(106, 150, 128); */
     padding: 25px;
-    /* margin-top: 3px; */
   }
+.item {
+  padding: 25px;
+}
+
 
 .item a {
     color: white;
     text-decoration: none;
 }
 
+/* .item: {
+  background-color: black;
+} */
+
+.item:hover {
+  background:hsla(120, 97%, 49%, 0.3) ;
+}
+
 .item a.activeLink{
   color: gold;
+}
+
+.conainer {
+  display: grid;
+  height: 400px;
 }

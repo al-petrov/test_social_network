@@ -90,6 +90,9 @@ let store = {
     };
     debugger;
     this._state.messages.messagesData.push(newMes);
+    let myIndex = this._state.messages.newMessages.findIndex(item => item.getterId == getter);
+    this._state.messages.newMessages.splice(myIndex, 1);
+
     this._callSubscriber(this._state);
   },
 

@@ -1,10 +1,11 @@
 import React from "react";
 import s from './Header.module.css';
+import myIcon from "./myIcon.png";
 
 const Header = () => {
     return (
     <header className={s.header}>
-        <img src='https://cdn.logo.com/hotlink-ok/logo-social.png'></img>
+        <img src={myIcon}></img>
     </header>)
 }
 

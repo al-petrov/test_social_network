@@ -59,7 +59,7 @@ const Messages = (props) => {
     return (
         // <BrowserRouter>
         <div className={m.messages}>
-            <div>
+            <div className={m.messageList}>
                 {messageElements}
             </div>
             <div>

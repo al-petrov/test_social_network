@@ -1,9 +1,12 @@
 .header{
     grid-area: h;
     background: hsla(120, 86%, 11%, 0.9) ;
-  }
+}
   
-  .header img {
-    width: 60px;
-  }
+.header img {
+    width: 43px;
+    margin-top: 6px;
+    margin-left: 6px;
+}
   
+ 
