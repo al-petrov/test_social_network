@@ -29,7 +29,6 @@ const Messages = (props) => {
         if (a.date < b.date) {
             return -1;
         }
-        // a должно быть равным b
         return 0;
     }
     );
@@ -55,7 +54,7 @@ const Messages = (props) => {
     //    render={ () => <Message id={message.id} message={message.message} />} />);
 
 
-     let currentMessageInput = React.createRef();
+    let currentMessageInput = React.createRef();
     return (
         // <BrowserRouter>
         <div className={m.messages}>

@@ -2,12 +2,16 @@
     grid-area: n;
     background:hsla(120, 86%, 11%, 0.9) ;
     /* background-color: rgb(106, 150, 128); */
-    padding: 25px;
+    /* margin: 40px 0px 0px 40px; */
+    padding-left:50px;
   }
 .item {
-  padding: 25px;
+  /* padding: 25px; */
 }
 
+.active {
+  background-color: blue;
+}
 
 .item a {
     color: white;
@@ -22,8 +26,22 @@
   background:hsla(120, 97%, 49%, 0.3) ;
 }
 
+/* .item .activeLink {
+  background:hsla(120, 97%, 49%, 0.3) ;  
+} */
+
 .item a.activeLink{
   color: gold;
+}
+
+.test {
+  /* background-color: hsla(120, 97%, 49%, 0.3); */
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* text-align: center;
+  vertical-align: middle; */
 }
 
 .conainer {
