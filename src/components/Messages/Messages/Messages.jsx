@@ -53,13 +53,14 @@ const Messages = (props) => {
     // let messageElements = props.data.map(message => <Route path={'/messages/' + message.senderId} 
     //    render={ () => <Message id={message.id} message={message.message} />} />);
 
-
     let currentMessageInput = React.createRef();
     return (
         // <BrowserRouter>
         <div className={m.messages}>
             <div className={m.messageList}>
+                <div id={'myPage'} className={m.justifier}>
                 {messageElements}
+                </div>
             </div>
             <div>
             <textarea onChange={onMessageChange} ref={currentMessageInput} className={m.newMessageField} value={props.textNewMessages}/>

@@ -8,7 +8,7 @@ const Profile = (props) => {
   let myPosts = props.posts;
 
   return (
-    <div>
+    <div className={p.thisContentWrapper}>
       <div className={p.profileWrapper}>
         <ProfileInfo />
       </div>

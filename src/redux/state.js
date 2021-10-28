@@ -11,7 +11,7 @@ let store = {
       ],
       messagesData: [
         { id: 1, senderId: "1", getterId: "999", message: 'hi', date: new Date(2021, 1, 1, 12, 24, 4) },
-        { id: 2, senderId: "1", getterId: "999", message: 'how are you лоро нгшгнш ененга к гн кенгкегкеншгепне егн  е ен внкеуенкекнеш ук 7екге 66щк67к76ек е ек шк6е кеш кешнк не арещ8н  кг к кгнешкенкангнк ек 6 кгнекнг нгк7кшка п н  к к ', date: new Date(2021, 1, 1, 12, 25, 0) },
+        { id: 2, senderId: "1", getterId: "999", message: 'how are you xfgdfg ds gsdfgdf sdfdfs dsfds fdsf sg sstegdfg sdfs ddgfd ', date: new Date(2021, 1, 1, 12, 25, 0) },
   
         { id: 7, senderId: "999", getterId: "1", message: 'hi', date: new Date(2021, 1, 1, 12, 24, 20) },
         { id: 8, senderId: "999", getterId: "1", message: 'i\'m fine', date: new Date(2021, 1, 1, 12, 25, 43) },
@@ -95,6 +95,10 @@ let store = {
 
     this._callSubscriber(this._state);
   },
+
+  dispatch() {
+    
+  }
 
 }
 

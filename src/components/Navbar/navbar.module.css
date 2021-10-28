@@ -4,9 +4,14 @@
     /* background-color: rgb(106, 150, 128); */
     /* margin: 40px 0px 0px 40px; */
     padding-left:50px;
-  }
+}
+
 .item {
   /* padding: 25px; */
+}
+
+.item:visited {
+  background-color: blue;
 }
 
 .active {
@@ -18,20 +23,13 @@
     text-decoration: none;
 }
 
-/* .item: {
-  background-color: black;
-} */
-
 .item:hover {
   background:hsla(120, 97%, 49%, 0.3) ;
 }
 
-/* .item .activeLink {
-  background:hsla(120, 97%, 49%, 0.3) ;  
-} */
-
 .item a.activeLink{
   color: gold;
+  background: darkmagenta;
 }
 
 .test {

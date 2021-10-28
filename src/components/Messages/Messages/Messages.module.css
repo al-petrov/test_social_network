@@ -16,7 +16,7 @@
 
 .messages {
     display: grid;
-    grid-template-rows: 10fr 5fr;
+    grid-template-rows: auto auto;
     grid-template-columns: 1fr;
     justify-items:center;
     align-items: end;
@@ -43,6 +43,14 @@
 }
 
 .messageList {
-    height: 100%;
- 
+    height: 88vh;
+    min-width: 100%;
+    overflow-y: auto;
+    
+}
+
+.justifier {
+    min-width: 70%;
+    max-width: 100%;
+    justify-items: center;
 }

@@ -11,7 +11,7 @@ const Navbar = () => {
 
     return (
         <nav className={n.nav}>
-            <div className={n.item}>
+            <div className={n.item} activeClassName={n.active}>
                 {/* <div className={n.container}> */}
                 <NavLink to='/profile' activeClassName={n.activeLink}><div className={n.test}>Profile</div></NavLink>
                 {/* </div> */}

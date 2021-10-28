@@ -3,7 +3,8 @@
 }
 
 .postsWrapper {
-    /* height: 56vh; */
+    height: max-content;
+    /* 56vh; */
     /* background-color: aliceblue; */
     /* overflow-y: scroll; */
     /* background-color: rgba(36, 49, 56, 0.8); */
@@ -15,4 +16,8 @@
     /* background-color: aliceblue; */
     /* background-color: rgba(36, 49, 56, 0.8); */
     /* opacity: .3; */
+}
+
+.thisContentWrapper{
+    /* overflow-y: auto; */
 }
