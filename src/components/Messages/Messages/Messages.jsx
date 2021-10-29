@@ -1,24 +1,7 @@
 import React from "react";
 import m from './Messages.module.css';
 import Message from "./Message/Message";
-
-const ActionSendMessageCreator = (text, getter) => {
-    return ({
-        type: "SEND-MESSAGE",
-        getterId: getter,
-        message: text,
-    }
-    )
-}
-
-const ActionAddSimbolNewMesssageCreator = (text, getter) => {
-    return ({
-        type: "ADD-SIMBOL-NEW-MESSAGE",
-        getter: getter,
-        newText: text,
-    }
-    )
-}
+import { AddSymbolNewMesssageActionCreator, SendMessageActionCreator } from "../../../redux/dialogs-reducer";
 
 const Messages = (props) => {
 
@@ -26,7 +9,7 @@ const Messages = (props) => {
 
     debugger;
     let findMessage = '';
-    for (let item of props.newMessages) {
+    for (let item of props.state.newMessages) {
         if (item.getterId == getter) {
             findMessage = item.message;
             break;
@@ -36,12 +19,12 @@ const Messages = (props) => {
     let sendMessage = () => {
         let text = currentMessageInput.current.value;
         debugger;
-        props.dispatch(ActionSendMessageCreator(text, getter));
+        props.dispatch(SendMessageActionCreator(text, getter));
     }
     let currentMessages = [];
-    for (let item of props.data) {
-        if (item.senderId === getter && item.getterId === props.myID ||
-            item.senderId === props.myID && item.getterId === getter) {
+    for (let item of props.state.messagesData) {
+        if (item.senderId === getter && item.getterId === props.state.myID ||
+            item.senderId === props.state.myID && item.getterId === getter) {
             currentMessages.push(item);
         }
     }
@@ -57,7 +40,7 @@ const Messages = (props) => {
     );
     let messageElements = currentMessages.map(function (message) {
 
-        let whoIs = (message.senderId === props.myID) ? "myMessages" : "yourMessages";
+        let whoIs = (message.senderId === props.state.myID) ? "myMessages" : "yourMessages";
         return (
             <div className={m[whoIs]}>
                 <Message id={message.id} message={message.message} />
@@ -66,7 +49,7 @@ const Messages = (props) => {
     });
     let onMessageChange = () => {
         let text = currentMessageInput.current.value;
-        props.dispatch(ActionAddSimbolNewMesssageCreator(text, getter))
+        props.dispatch(AddSymbolNewMesssageActionCreator(text, getter))
     }
 
     let currentMessageInput = React.createRef();

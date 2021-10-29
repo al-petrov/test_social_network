@@ -1,20 +1,7 @@
 import React from "react";
+import { AddPostActionCreator, AddSymbolNewPostActionCreator } from "../../../redux/profile-reducer";
 import p from './MyPosts.module.css';
 import Post from "./Post/Post";
-
-const ActionAddPostCreator = (text) => {
-  return({
-    type: "ADD-POST",
-  })
-}
-
-const ActionAddSymbolNewPostCreator = (text) => {
-  return({
-    type: "ADD-SIMBOL-NEW-POST",
-    newText: text,
-  })
-}
-
 
 const MyPost = (props) => {
 
@@ -22,12 +9,12 @@ const MyPost = (props) => {
 
   let addPost = () => {
     let text = newPostElement.current.value;
-    props.dispatch(ActionAddPostCreator());
+    props.dispatch(AddPostActionCreator(text));
   }
 
   let onPostChange = () => {
     let myText = newPostElement.current.value;
-    props.dispatch(ActionAddSymbolNewPostCreator(myText));
+    props.dispatch(AddSymbolNewPostActionCreator(myText));
   }
 
   let newPostElement = React.createRef();

@@ -13,7 +13,7 @@ const MyMessages = (props) => {
             </div>
             </div>
             <div className={m.messages}>
-                <Messages dispatch={props.dispatch} data={props.state.messages.messagesData} myID={props.state.myID} newMessages = {props.state.messages.newMessages} />
+                <Messages dispatch={props.dispatch} state={props.state.messages}  />
             </div>
         </div>
     )
