@@ -11,8 +11,8 @@ import Footer from './components/Footer/Footer';
 
 
 const App = (props) => {
-    let myDataMessages = props.data.messages;
-    let myDataPosts = props.data.profilePage;
+    let myDataMessages = props.state.messages;
+    let myDataPosts = props.state.profilePage;
     return (
         <BrowserRouter>
             <div style={{
@@ -22,8 +22,8 @@ const App = (props) => {
                     <Header />
                     <Navbar />
                     <div className='app-wrapper-content'>
-                        <Route path='/messages' render={ () => <MyMessages data={myDataMessages} myID = {props.data.myID} addSimbolNewMessage = {props.addSimbolNewMessage} sendMessage={props.sendMessage} />} />
-                        <Route path='/profile'  render={ () => <Profile posts={myDataPosts} addPost={props.addPost} addSimbolNewPost={props.addSimbolNewPost}/>} />
+                        <Route path='/messages' render={ () => <MyMessages state={props.state} dispatch={props.dispatch} />} />
+                        <Route path='/profile'  render={ () => <Profile state={props.state} dispatch={props.dispatch} />} />
                         <Route path='/news'  render={ () => <News />} />
                         <Route path='/music'  render={ () => <Music />} />
                         <Route path='/settings'  render={ () => <Settings />} />

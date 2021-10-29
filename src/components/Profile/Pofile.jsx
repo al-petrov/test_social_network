@@ -13,7 +13,7 @@ const Profile = (props) => {
         <ProfileInfo />
       </div>
       <div className={p.postsWrapper}>
-        <MyPost myPosts={myPosts} addPost={props.addPost} addSimbolNewPost={props.addSimbolNewPost} />
+        <MyPost myPosts={props.state.profilePage} dispatch={props.dispatch} />
       </div>
     </div>)
 }

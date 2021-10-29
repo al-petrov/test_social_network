@@ -2,19 +2,32 @@ import React from "react";
 import p from './MyPosts.module.css';
 import Post from "./Post/Post";
 
+const ActionAddPostCreator = (text) => {
+  return({
+    type: "ADD-POST",
+  })
+}
+
+const ActionAddSymbolNewPostCreator = (text) => {
+  return({
+    type: "ADD-SIMBOL-NEW-POST",
+    newText: text,
+  })
+}
+
+
 const MyPost = (props) => {
 
   let allPosts = props.myPosts.posts.map(p => <Post message={p.text} likeCount={p.likeCount} />)
 
   let addPost = () => {
     let text = newPostElement.current.value;
-    props.addPost(text);
+    props.dispatch(ActionAddPostCreator());
   }
 
   let onPostChange = () => {
- 
     let myText = newPostElement.current.value;
-    props.addSimbolNewPost(myText);
+    props.dispatch(ActionAddSymbolNewPostCreator(myText));
   }
 
   let newPostElement = React.createRef();

@@ -5,7 +5,8 @@
 }
 
 .dialogsBar {
-    background-color: rgba(216, 198, 198, 0.637);
+    background: hsla(120, 86%, 11%, 0.9) ;
+    background-color: hsla(120, 97%, 49%, 0.3) ;
     height: 95vh;
 }
 
@@ -15,4 +16,8 @@
     grid-template-columns: ifr;
     align-items: end;
     height: auto;
+}
+
+.bacgr {
+    background: hsla(120, 86%, 11%, 0.9) ;
 }

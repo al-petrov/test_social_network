@@ -8,10 +8,10 @@ import store from './redux/state';
 let rerenderMyApp = (state) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App data={state} addPost={store.addPost.bind(store)} 
-            addSimbolNewMessage={store.addSimbolNewMessage.bind(store)}
+            <App state={state} dispatch={store.dispatch.bind(store)}  />
+            {/* addSimbolNewMessage={store.addSimbolNewMessage.bind(store)}
             addSimbolNewPost={store.addSimbolNewPost.bind(store)}
-            sendMessage={store.sendMessage.bind(store)} />
+            sendMessage={store.sendMessage.bind(store)} */}
         </React.StrictMode>,
         document.getElementById('root')
     );

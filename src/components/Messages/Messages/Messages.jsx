@@ -1,27 +1,50 @@
 import React from "react";
 import m from './Messages.module.css';
 import Message from "./Message/Message";
-import { BrowserRouter, Route } from "react-router-dom";
+
+const ActionSendMessageCreator = (text, getter) => {
+    return ({
+        type: "SEND-MESSAGE",
+        getterId: getter,
+        message: text,
+    }
+    )
+}
+
+const ActionAddSimbolNewMesssageCreator = (text, getter) => {
+    return ({
+        type: "ADD-SIMBOL-NEW-MESSAGE",
+        getter: getter,
+        newText: text,
+    }
+    )
+}
 
 const Messages = (props) => {
 
+    let getter = window.location.pathname.substring(10, window.location.pathname.length);
 
+    debugger;
+    let findMessage = '';
+    for (let item of props.newMessages) {
+        if (item.getterId == getter) {
+            findMessage = item.message;
+            break;
+        }
+    }
 
     let sendMessage = () => {
         let text = currentMessageInput.current.value;
         debugger;
-        props.sendMessage(text, props.senderID);
+        props.dispatch(ActionSendMessageCreator(text, getter));
     }
-
     let currentMessages = [];
-
     for (let item of props.data) {
-        if (item.senderId === props.senderID && item.getterId === props.myID ||
-            item.senderId === props.myID && item.getterId === props.senderID) {
+        if (item.senderId === getter && item.getterId === props.myID ||
+            item.senderId === props.myID && item.getterId === getter) {
             currentMessages.push(item);
         }
     }
-
     currentMessages.sort(function (a, b) {
         if (a.date > b.date) {
             return 1;
@@ -32,7 +55,6 @@ const Messages = (props) => {
         return 0;
     }
     );
-
     let messageElements = currentMessages.map(function (message) {
 
         let whoIs = (message.senderId === props.myID) ? "myMessages" : "yourMessages";
@@ -42,35 +64,26 @@ const Messages = (props) => {
             </div>
         )
     });
-
     let onMessageChange = () => {
         let text = currentMessageInput.current.value;
-        props.addSimbolNewMessage(text, props.senderID);
+        props.dispatch(ActionAddSimbolNewMesssageCreator(text, getter))
     }
-
-    // let messageElements = props.data.map(message => <Message id={message.id} message={message.message} />);
-
-    // let messageElements = props.data.map(message => <Route path={'/messages/' + message.senderId} 
-    //    render={ () => <Message id={message.id} message={message.message} />} />);
 
     let currentMessageInput = React.createRef();
     return (
-        // <BrowserRouter>
         <div className={m.messages}>
             <div className={m.messageList}>
                 <div id={'myPage'} className={m.justifier}>
-                {messageElements}
+                    {messageElements}
                 </div>
             </div>
             <div>
-            <textarea onChange={onMessageChange} ref={currentMessageInput} className={m.newMessageField} value={props.textNewMessages}/>
-            {/* <div className={m.newMessage}> */}
-            <button onClick={sendMessage} className={m.newMessage}>send</button>
+                <textarea onChange={onMessageChange} ref={currentMessageInput} className={m.newMessageField} value={findMessage} />
+                {/* <div className={m.newMessage}> */}
+                <button onClick={sendMessage} className={m.newMessage}>send</button>
             </div>
             {/* </div> */}
         </div>
-
-        // </BrowserRouter>
     )
 }
 
