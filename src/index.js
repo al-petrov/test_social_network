@@ -3,24 +3,31 @@ import reportWebVitals from './reportWebVitals';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import store from './redux/state';
+import store from './redux/redux-store';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 // import store from './redux/redux-store';
 
 let rerenderMyApp = (state) => {
+    debugger;
     ReactDOM.render(
-        <React.StrictMode>
-            <App state={state} dispatch={store.dispatch.bind(store)}  />
-            {/* addSimbolNewMessage={store.addSimbolNewMessage.bind(store)}
-            addSimbolNewPost={store.addSimbolNewPost.bind(store)}
-            sendMessage={store.sendMessage.bind(store)} */}
-        </React.StrictMode>,
+        <BrowserRouter>
+            <React.StrictMode>
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            </React.StrictMode>
+        </BrowserRouter>,
         document.getElementById('root')
     );
 };
 
-store.subscribe(rerenderMyApp);
-
 rerenderMyApp(store.getState());
+
+store.subscribe(() => {
+    let state = store.getState();
+    rerenderMyApp(state);
+});
 
 
 

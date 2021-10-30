@@ -42,7 +42,7 @@ let store = {
       newPostText: 'add new post here',
       myID: "999",
     },
-    sideBar: {},
+    sidebar: {},
   },
   _callSubscriber() {
 
@@ -58,7 +58,7 @@ let store = {
 
     this._state.profilePage = profileReduser(this._state.profilePage, action);
     this._state.messages = dialogsReduser(this._state.messages, action);
-    this._state.sideBar = sidebarReducer(this._state.sideBar, action);
+    this._state.sideBar = sidebarReducer(this._state.sidebar, action);
     
     this._callSubscriber(this._state);
   },

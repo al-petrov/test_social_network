@@ -1,8 +1,23 @@
 const ADD_POST = "ADD-POST";
 const ADD_SYMBOL_NEW_POST = "ADD-SYMBOL-NEW-POST";
 
+let initialState = {
+  posts: [
+    { id: 1, text: 'hi, how are you?', likeCount: 4 },
+    { id: 2, text: 'my fist post', likeCount: 14 },
+    { id: 3, text: 'hello world', likeCount: 111 },
+    { id: 4, text: 'houdi-hoooo', likeCount: 4 },
+    { id: 5, text: 'my fist post', likeCount: 14 },
+    { id: 6, text: 'hello world', likeCount: 111 },
+    { id: 7, text: 'houdi-hoooo', likeCount: 4 },
+    // { id: 1, text: 'houdi-hoooo', likeCount: 4 },
+  ],
+  newPostText: 'add new post here',
+  myID: "999",
+}
 
-const profileReduser = (state, action) => {
+const profileReducer = (state = initialState, action) => {
+  debugger;
   switch (action.type) {
     case ADD_POST:
       debugger;
@@ -35,4 +50,4 @@ export const AddSymbolNewPostActionCreator = (text) => {
   })
 }
 
-export default profileReduser;
+export default profileReducer;

@@ -2,8 +2,11 @@ import React from "react";
 import m from './Messages.module.css';
 import Message from "./Message/Message";
 import { AddSymbolNewMesssageActionCreator, SendMessageActionCreator } from "../../../redux/dialogs-reducer";
+import { useRouteMatch } from "react-router";
 
 const Messages = (props) => {
+    
+    let match = useRouteMatch();
 
     let getter = window.location.pathname.substring(10, window.location.pathname.length);
 
@@ -17,9 +20,10 @@ const Messages = (props) => {
     }
 
     let sendMessage = () => {
-        let text = currentMessageInput.current.value;
-        debugger;
-        props.dispatch(SendMessageActionCreator(text, getter));
+        props.sendMessage(currentMessageInput.current.value, getter);
+        // let text = currentMessageInput.current.value;
+        // debugger;
+        // props.dispatch(SendMessageActionCreator(text, getter));
     }
     let currentMessages = [];
     for (let item of props.state.messagesData) {
@@ -47,9 +51,9 @@ const Messages = (props) => {
             </div>
         )
     });
+
     let onMessageChange = () => {
-        let text = currentMessageInput.current.value;
-        props.dispatch(AddSymbolNewMesssageActionCreator(text, getter))
+        props.messageChanged(AddSymbolNewMesssageActionCreator(currentMessageInput.current.value, getter))
     }
 
     let currentMessageInput = React.createRef();
