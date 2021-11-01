@@ -10,7 +10,6 @@ const Messages = (props) => {
 
     let getter = window.location.pathname.substring(10, window.location.pathname.length);
 
-    debugger;
     let findMessage = '';
     for (let item of props.state.newMessages) {
         if (item.getterId == getter) {
@@ -53,7 +52,8 @@ const Messages = (props) => {
     });
 
     let onMessageChange = () => {
-        props.messageChanged(AddSymbolNewMesssageActionCreator(currentMessageInput.current.value, getter))
+        debugger;
+        props.messageChanged(currentMessageInput.current.value, getter);
     }
 
     let currentMessageInput = React.createRef();

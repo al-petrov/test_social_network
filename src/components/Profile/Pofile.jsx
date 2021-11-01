@@ -3,10 +3,7 @@ import p from './Profile.module.css';
 import ProfileInfo from "./ProfileInfo/PofileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Profile = (props) => {
-
-  let myPosts = props.posts;
-
+const Profile = () => {
   return (
     <div className={p.thisContentWrapper}>
       <div className={p.profileWrapper}>

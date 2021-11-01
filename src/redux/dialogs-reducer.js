@@ -9,8 +9,8 @@ let initialState = {
         { id: 4, name: 'Timur' },
         { id: 5, name: 'Dima' },
         { id: 6, name: 'Denis' },
-      ],
-      messagesData: [
+    ],
+    messagesData: [
         { id: 1, senderId: "1", getterId: "999", message: 'hi', date: new Date(2021, 1, 1, 12, 24, 4) },
         { id: 2, senderId: "1", getterId: "999", message: 'how are you xfgdfg ds gsdfgdf sdfdfs dsfds fdsf sg sstegdfg sdfs ddgfd ', date: new Date(2021, 1, 1, 12, 25, 0) },
 
@@ -21,15 +21,18 @@ let initialState = {
         { id: 4, senderId: "3", getterId: "999", message: 'fuck', date: new Date(2021, 1, 1, 12, 24, 4) },
         { id: 5, senderId: "3", getterId: "999", message: 'you', date: new Date(2021, 1, 1, 12, 24, 4) },
         { id: 6, senderId: "3", getterId: "999", message: 'YO', date: new Date(2021, 1, 1, 12, 24, 4) },
-      ],
-      newMessages: [],
-      myID: "999",
-  }
-  
+    ],
+    newMessages: [],
+    myID: "999",
+}
+
 
 const dialogsReducer = (state = initialState, action) => {
+
+    let stateCopy = {...state};
+
     switch (action.type) {
-        case SEND_MESSAGE:
+        case SEND_MESSAGE: 
             let newMes = {
                 id: state.messagesData.length + 1,
                 senderId: state.myID,
@@ -37,16 +40,18 @@ const dialogsReducer = (state = initialState, action) => {
                 message: action.message,
                 date: Date.now(),
             };
+            stateCopy.messagesData = [...state.messagesData, newMes];
+            stateCopy.newMessages = [...state.newMessages];
+            let myIndex = stateCopy.newMessages.findIndex(item => item.getterId == item.getter);
+            stateCopy.newMessages.splice(myIndex, 1);
+            return stateCopy;
+        case ADD_SIMBOL_NEW_MESSAGE: 
             debugger;
-            state.messagesData.push(newMes);
-            let myIndex = state.newMessages.findIndex(item => item.getterId == item.getter);
-            state.newMessages.splice(myIndex, 1);
-            return state;
-        case ADD_SIMBOL_NEW_MESSAGE:
-            for (let item of state.newMessages) {
+            stateCopy.newMessages = [...state.newMessages];
+            for (let item of stateCopy.newMessages) {
                 if (item.getterId == action.getter) {
                     item.message = action.newText;
-                    return state;
+                    return stateCopy;
                 }
             }
             let newMessage = {
@@ -56,9 +61,8 @@ const dialogsReducer = (state = initialState, action) => {
                 message: action.newText,
                 date: Date.now(),
             }
-            state.newMessages.push(newMessage);
-            return state;
-
+            stateCopy.newMessages.push(newMessage);
+            return stateCopy;
         default:
             return state;
     }
@@ -73,6 +77,7 @@ export const SendMessageActionCreator = (text, getter) => {
     )
 }
 export const AddSymbolNewMesssageActionCreator = (text, getter) => {
+    debugger;
     return ({
         type: ADD_SIMBOL_NEW_MESSAGE,
         getter: getter,

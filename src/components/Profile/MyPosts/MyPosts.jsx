@@ -8,7 +8,7 @@ const MyPost = (props) => {
   let allPosts = props.myPosts.posts.map(p => <Post message={p.text} likeCount={p.likeCount} />)
 
   let addPost = () => {
-    props.postChanged();
+    props.addPost();
   }
 
   let onPostChange = () => {

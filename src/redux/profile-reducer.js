@@ -17,33 +17,35 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
-  debugger;
   switch (action.type) {
     case ADD_POST:
-      debugger;
       let newPost = {
         id: state.posts.length + 1,
         text: state.newPostText,
         likeCount: 0,
       };
-      state.posts.push(newPost);
-      debugger;
-      state.newPostText = 'add new post here';
-      return state;
+      return {
+        ...state,
+        posts: [...state.posts, newPost],
+        newPostText: 'add new post here',
+      }
     case ADD_SYMBOL_NEW_POST:
-      state.newPostText = action.newText;
-      return state;
+      return {
+        ...state,
+        newPostText: action.newText,
+      }
     default:
       return state;
   }
 }
 
-export const AddPostActionCreator = (text) => {
+export const AddPostActionCreator = () => {
   return ({
     type: ADD_POST,
   })
 }
 export const AddSymbolNewPostActionCreator = (text) => {
+  debugger
   return ({
     type: ADD_SYMBOL_NEW_POST,
     newText: text,

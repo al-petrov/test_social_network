@@ -4,7 +4,6 @@ import MyPost from "./MyPosts";
 
 
 let mapStateToProps = (state) => {
-  debugger;
   return {myPosts: state.profilePage}
 }
 

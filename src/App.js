@@ -7,11 +7,10 @@ import { Route } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import Footer from './components/Footer/Footer';
+import UsersContainer from './components/Users/UsersContainer';
 
 
 const App = (props) => {
-    debugger;
     return (
         <div style={{
             backgroundImage: `url("https://i.redd.it/c3uhsgo1vx541.jpg")`
@@ -21,10 +20,11 @@ const App = (props) => {
                 <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path='/messages' render={() => <MyMessages />} />
-                    <Route path='/profile' render={() => <Profile state={props.state} dispatch={props.dispatch} />} />
+                    <Route path='/profile' render={() => <Profile />} />
                     <Route path='/news' render={() => <News />} />
                     <Route path='/music' render={() => <Music />} />
                     <Route path='/settings' render={() => <Settings />} />
+                    <Route path='/users' render={() => <UsersContainer />} />
                 </div>
                 {/* <Footer /> */}
             </div>
