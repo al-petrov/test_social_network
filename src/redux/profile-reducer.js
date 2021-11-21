@@ -3,13 +3,13 @@ const ADD_SYMBOL_NEW_POST = "ADD-SYMBOL-NEW-POST";
 
 let initialState = {
   posts: [
-    { id: 1, text: 'hi, how are you?', likeCount: 4 },
-    { id: 2, text: 'my fist post', likeCount: 14 },
-    { id: 3, text: 'hello world', likeCount: 111 },
-    { id: 4, text: 'houdi-hoooo', likeCount: 4 },
-    { id: 5, text: 'my fist post', likeCount: 14 },
-    { id: 6, text: 'hello world', likeCount: 111 },
-    { id: 7, text: 'houdi-hoooo', likeCount: 4 },
+    { id: 1, user_id: '', text: 'hi, how are you?', likeCount: 4 },
+    { id: 2, user_id: '', text: 'my fist post', likeCount: 14 },
+    { id: 3, user_id: '', text: 'hello world', likeCount: 111 },
+    { id: 4, user_id: '', text: 'houdi-hoooo', likeCount: 4 },
+    { id: 5, user_id: '', text: 'my fist post', likeCount: 14 },
+    { id: 6, user_id: '', text: 'hello world', likeCount: 111 },
+    { id: 7, user_id: '', text: 'houdi-hoooo', likeCount: 4 },
     // { id: 1, text: 'houdi-hoooo', likeCount: 4 },
   ],
   newPostText: 'add new post here',
