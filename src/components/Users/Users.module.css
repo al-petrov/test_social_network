@@ -30,3 +30,7 @@
     border-color: black;
     border: black;
 }
+
+.selectedPage {
+    font-weight: bold;
+}

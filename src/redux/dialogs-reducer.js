@@ -42,14 +42,14 @@ const dialogsReducer = (state = initialState, action) => {
             };
             stateCopy.messagesData = [...state.messagesData, newMes];
             stateCopy.newMessages = [...state.newMessages];
-            let myIndex = stateCopy.newMessages.findIndex(item => item.getterId == item.getter);
+            let myIndex = stateCopy.newMessages.findIndex(item => item.getterId === item.getter);
             stateCopy.newMessages.splice(myIndex, 1);
             return stateCopy;
         case ADD_SIMBOL_NEW_MESSAGE: 
             debugger;
             stateCopy.newMessages = [...state.newMessages];
             for (let item of stateCopy.newMessages) {
-                if (item.getterId == action.getter) {
+                if (item.getterId === action.getter) {
                     item.message = action.newText;
                     return stateCopy;
                 }

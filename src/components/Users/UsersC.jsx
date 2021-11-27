@@ -1,29 +1,42 @@
 import React from "react"
+import u from "./Users.module.css"
+import NoFoto from "./Foto/NoFoto.png"
 
-class User extends React.Component {
-    render() {
-        return <div>
-        {this.props.users.map((item) => <div key={item.id} className={u.userLine}>
-            <div className={u.leftSide}>
-                <img src={item.img ? item.img : NoFoto} />
-                {item.friends
-                    ? <button onClick={() => props.unfollow(item.id)}>Unfollow</button>
-                    : <button onClick={() => props.follow(item.id)}>Follow</button>}
-            </div>
-            <div className={u.centralSide}>
-                <span><h4>{item.userName}</h4></span>
-                <span>{item.userStatus}</span>
-            </div>
-            <div>
-                <span><h4>{item.location.country}</h4></span>
-                <span>{item.location.city}</span>
-            </div>
-        </div>
-        )}
-    </div>
-
+const Users = (props) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
+    return (
+        <div>
+            <div>
+                {pages.map(p => {
+                    return <span className={props.currentPage === p && u.selectedPage}
+                        onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
+                })}
+            </div>
+            {/* <button onClick={this.getUsers}>Get Users</button> */}
+            {props.users.map((item) => <div key={item.id} className={u.userLine}>
+                <div className={u.leftSide}>
+                    <img src={item.img ? item.img : NoFoto} />
+                    {item.friends
+                        ? <button onClick={() => props.unfollow(item.id)}>Unfollow</button>
+                        : <button onClick={() => props.follow(item.id)}>Follow</button>}
+                </div>
+                <div className={u.centralSide}>
+                    <span><h4>{item.username}</h4></span>
+                    <span>{item.userstatus}</span>
+                </div>
+                <div>
+                    <span><h4>{item.country}</h4></span>
+                    <span>default city </span>
+                </div>
+            </div>
+            )}
+        </div>
 
+    )
 }
 
-export default User;
+export default Users;
