@@ -10,14 +10,9 @@ const Users = (props) => {
     }
     return (
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p && u.selectedPage}
-                        onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
-                })}
-            </div>
             {/* <button onClick={this.getUsers}>Get Users</button> */}
-            {props.users.map((item) => <div key={item.id} className={u.userLine}>
+            {props.users.map((item) => 
+            <div key={item.id} className={u.userLine}>
                 <div className={u.leftSide}>
                     <img src={item.img ? item.img : NoFoto} />
                     {item.friends
@@ -34,6 +29,12 @@ const Users = (props) => {
                 </div>
             </div>
             )}
+            <div className={u.pagesBar}>
+                {pages.map(p => {
+                    return <span className={props.currentPage === p ? u.selectedPage : u.unselectedPage}
+                        onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
+                })}
+            </div>
         </div>
 
     )
