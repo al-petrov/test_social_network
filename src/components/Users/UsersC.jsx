@@ -1,6 +1,7 @@
 import React from "react"
 import u from "./Users.module.css"
-import NoFoto from "./Foto/NoFoto.png"
+import NoFoto from "../Common/Foto/NoFoto.png"
+import { NavLink } from "react-router-dom"
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -11,23 +12,30 @@ const Users = (props) => {
     return (
         <div>
             {/* <button onClick={this.getUsers}>Get Users</button> */}
-            {props.users.map((item) => 
-            <div key={item.id} className={u.userLine}>
-                <div className={u.leftSide}>
-                    <img src={item.img ? item.img : NoFoto} />
-                    {item.friends
-                        ? <button onClick={() => props.unfollow(item.id)}>Unfollow</button>
-                        : <button onClick={() => props.follow(item.id)}>Follow</button>}
+            {props.users.map((item) =>
+
+                <div key={item.id} className={u.userLine}>
+                    <div className={u.leftSide}>
+                        <NavLink to={'/profile/' + item.id}>
+                            <img src={item.img ? item.img : NoFoto} />
+                        </NavLink>
+                        {item.friends
+                            ? <button onClick={() => props.unfollow(item.id)}>Unfollow</button>
+                            : <button onClick={() => props.follow(item.id)}>Follow</button>}
+                    </div>
+
+                    <div className={u.centralSide}>
+                        <NavLink to={'/profile/' + item.id}>
+                            <span><h4>{item.username}</h4></span>
+                        </NavLink>
+                        <span>{item.userstatus}</span>
+                    </div>
+
+                    <div>
+                        <span><h4>{item.country}</h4></span>
+                        <span>default city </span>
+                    </div>
                 </div>
-                <div className={u.centralSide}>
-                    <span><h4>{item.username}</h4></span>
-                    <span>{item.userstatus}</span>
-                </div>
-                <div>
-                    <span><h4>{item.country}</h4></span>
-                    <span>default city </span>
-                </div>
-            </div>
             )}
             <div className={u.pagesBar}>
                 {pages.map(p => {

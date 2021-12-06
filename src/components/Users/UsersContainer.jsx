@@ -46,7 +46,6 @@ class UsersAPIComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    debugger;
     return {
         users: state.users.usersData,
         pageSize: state.users.pageSize,

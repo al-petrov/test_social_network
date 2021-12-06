@@ -31,6 +31,10 @@
     border: black;
 }
 
+.centralSide a{
+    text-decoration: none;
+}
+
 .pagesBar {
     display: flex;
     align-items: center;
