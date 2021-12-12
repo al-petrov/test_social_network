@@ -25,6 +25,7 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
+  posts: state.profilePage.posts,
   profile: state.profilePage.profile,
   myID: state.profilePage.myID,
   a: 13  

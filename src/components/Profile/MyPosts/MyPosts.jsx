@@ -3,9 +3,9 @@ import { AddPostActionCreator, AddSymbolNewPostActionCreator } from "../../../re
 import p from './MyPosts.module.css';
 import Post from "./Post/Post";
 
-const MyPost = (props) => {
+const MyPosts = (props) => {
   debugger;
-  let allPosts = props.myPosts.posts.map(p => <Post message={p.text} likeCount={p.likeCount} />)
+  let allPosts = props.posts.map(p => <Post message={p.text} likeCount={p.likeCount} />)
 
   let addPost = () => {
     props.addPost();
@@ -22,7 +22,7 @@ const MyPost = (props) => {
       <div>
         <h3>My posts</h3>
         <div>
-          <textarea onChange={onPostChange} ref={newPostElement} value={props.myPosts.newPostText} />
+          <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
           <div>
             <button onClick={() => addPost()}>Add post</button>
             <button>Remove</button>
@@ -37,4 +37,4 @@ const MyPost = (props) => {
   )
 }
 
-export default MyPost
+export default MyPosts

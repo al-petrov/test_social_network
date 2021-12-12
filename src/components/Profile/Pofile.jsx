@@ -11,7 +11,7 @@ const Profile = (props) => {
         <ProfileInfo profile={props.profile} />
       </div>
       <div className={p.postsWrapper}>
-        <MyPostsContainer />
+        <MyPostsContainer myID={props.myID} />
       </div>
     </div>)
 }

@@ -1,6 +1,7 @@
 const ADD_POST = "ADD-POST";
 const ADD_SYMBOL_NEW_POST = "ADD-SYMBOL-NEW-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
+const SET_USER_POSTS = "SET-USER-POSTS";
 
 let initialState = {
   posts: [
@@ -41,19 +42,26 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         profile: action.profile
       }
+    case SET_USER_POSTS:
+      return {
+        ...state,
+        posts: action.posts
+      }
     default:
       return state;
   }
 }
 
-export const AddPostActionCreator = () => {
+export const addPost = () => {
   return ({
     type: ADD_POST,
   })
 }
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
- 
-export const AddSymbolNewPostActionCreator = (text) => {
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+
+export const setUserPosts = (posts) => ({ type: SET_USER_POSTS, posts })
+
+export const addSymbolNewPost = (text) => {
   debugger
   return ({
     type: ADD_SYMBOL_NEW_POST,
