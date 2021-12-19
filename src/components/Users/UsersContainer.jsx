@@ -10,12 +10,21 @@ class UsersAPIComponent extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true);
-            axios.get(`http://barabulka.site:8080/api/user?size=${this.props.pageSize}&current=${this.props.currentPage}`)
+            axios.defaults.withCredentials = true;
+            axios.get(`http://barabulka.site:8080/api/user?size=${this.props.pageSize}&current=${this.props.currentPage}`, {
+                 withCredentials: true
+                })
                 .then(response => {
+                    debugger;
                     this.props.toggleIsFetching(false);
                     this.props.setUsers(response.data.users);
                     this.props.setTotalUsersCount(response.data.count);                  
-                });
+                })
+                .catch(err => {
+                    console.log('hi')
+                    debugger
+                    console.log(err.response);
+                  });
         }
     }
 

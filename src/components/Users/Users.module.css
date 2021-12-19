@@ -48,10 +48,12 @@
     text-align: center;
     margin: 0px 10px 0px 10px;
     width: 20px;
+    cursor: pointer;
 }
 
 .unselectedPage {
     width: 20px;
     margin: 0px 5px 0px 5px;
     text-align: center;
+    cursor: pointer;
 }

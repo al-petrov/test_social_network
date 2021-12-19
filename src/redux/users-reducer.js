@@ -22,7 +22,6 @@ const usersReducer = (state = initialState, action) => {
             return ({
                 ...state,
                 usersData: state.usersData.map((item) => item.id === action.userId ? { ...item, friends: false } : item),
-
             })
         case FOLLOW:
             return ({

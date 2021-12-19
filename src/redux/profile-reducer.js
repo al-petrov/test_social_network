@@ -14,7 +14,7 @@ let initialState = {
     { id: 7, user_id: '', text: 'houdi-hoooo', likeCount: 4 },
     // { id: 1, text: 'houdi-hoooo', likeCount: 4 },
   ],
-  newPostText: 'add new post here',
+  newPostText: '',
   profile: null,
   myID: "4",
 }
@@ -30,12 +30,12 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts, newPost],
-        newPostText: 'add new post here',
+        newPostText: '',
       }
     case ADD_SYMBOL_NEW_POST:
       return {
         ...state,
-        newPostText: action.newText,
+        newPostText: action.text,
       }
     case SET_USER_PROFILE:
       return {
@@ -57,16 +57,10 @@ export const addPost = () => {
     type: ADD_POST,
   })
 }
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export const setUserProfile = profile => ({ type: SET_USER_PROFILE, profile })
 
-export const setUserPosts = (posts) => ({ type: SET_USER_POSTS, posts })
+export const setUserPosts = posts => ({ type: SET_USER_POSTS, posts })
 
-export const addSymbolNewPost = (text) => {
-  debugger
-  return ({
-    type: ADD_SYMBOL_NEW_POST,
-    newText: text,
-  })
-}
+export const addSymbolNewPost = text => ({ type: ADD_SYMBOL_NEW_POST, text })
 
 export default profileReducer;

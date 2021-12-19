@@ -21,7 +21,7 @@ class MyPostsContainer extends React.Component {
   render() {
     return (
       <MyPosts {...this.props} />
-    )
+    )  
   }
 }
 

@@ -12,7 +12,7 @@ const MyPosts = (props) => {
   }
 
   let onPostChange = () => {
-    props.postChanged(newPostElement.current.value);
+    props.addSymbolNewPost(newPostElement.current.value);
   }
 
   let newPostElement = React.createRef();
@@ -22,7 +22,7 @@ const MyPosts = (props) => {
       <div>
         <h3>My posts</h3>
         <div>
-          <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
+          <textarea placeholder='add post here'  onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
           <div>
             <button onClick={() => addPost()}>Add post</button>
             <button>Remove</button>
