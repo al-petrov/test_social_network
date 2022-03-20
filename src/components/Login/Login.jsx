@@ -1,5 +1,5 @@
 import React from 'react';
-import m from './Settings.module.css';
+import m from './Login.module.css';
 import * as axios from 'axios';
 import { setAuthUserData } from '../../redux/auth-reducer';
 
@@ -43,42 +43,23 @@ let onSend = () => {
 
 let currentLoginInput = React.createRef();
 let currentPaswordInput = React.createRef();
-let currentUsernameInput = React.createRef();
-let currentCountryInput = React.createRef();
-let currentStatusInput = React.createRef();
-let currentImageInput = React.createRef();
-
-const Settings = props => {
+const Login = props => {
   return (
     <div className={m.loginComponent}>
       <div className={m.loginBlock}>
         {/* <div className={m.}> */}
         <div className={m.textLogin}>login:</div>
         <input ref={currentLoginInput} className={m.inputLogin} />
-        <div className={m.textLogin}>username:</div>
-        <input ref={currentUsernameInput} className={m.inputLogin} />
-        <div className={m.textLogin}>country:</div>
-        <input ref={currentCountryInput} className={m.inputLogin} />
-
-        <div className={m.textLogin}>status:</div>
-        <input ref={currentStatusInput} className={m.inputLogin} />
-        <div className={m.textLogin}>image:</div>
-        <input ref={currentImageInput} className={m.inputLogin} />
-
         <div className={m.textLogin}>password:</div>
         <input type={'password'} ref={currentPaswordInput} className={m.inputLogin} />
         <button
           onClick={() => {
             axios
-              .put(
-                `http://barabulka.site:8080/api/user`,
+              .post(
+                `http://barabulka.site:8080/api/login`,
                 {
-                  id: props.myID,
-                  username: currentUsernameInput.current.value,
-                  country: currentCountryInput.current.value,
-                  userstatus: currentStatusInput.current.value,
                   login: currentLoginInput.current.value,
-                  img: currentImageInput.current.value,
+                  pas: currentPaswordInput.current.value,
                 },
                 {
                   withCredentials: true,
@@ -118,4 +99,4 @@ const Settings = props => {
   );
 };
 
-export default Settings;
+export default Login;
