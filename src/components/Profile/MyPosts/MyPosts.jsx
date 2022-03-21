@@ -2,15 +2,13 @@ import React from 'react';
 import { AddPostActionCreator, AddSymbolNewPostActionCreator } from '../../../redux/profile-reducer';
 import p from './MyPosts.module.css';
 import Post from './Post/Post';
+import axios from 'axios';
+import { usersAPI } from '../../../api/api';
 
 const MyPosts = props => {
   let allPosts = props.posts.map(p => <Post message={p.text} likeCount={p.likeCount} />);
 
   let inputArea = props.profile ? props.profile.userId == props.myID : false;
-
-  let addPost = () => {
-    props.addPost();
-  };
 
   let onPostChange = () => {
     props.addSymbolNewPost(newPostElement.current.value);
@@ -31,7 +29,20 @@ const MyPosts = props => {
               value={props.newPostText}
             />
             <div>
-              <button onClick={() => props.addPost()}>Add post</button>
+              <button
+                disabled={props.addPostIsFetching}
+                onClick={() => {
+                  props.addPostInProgress(true);
+                  if (props.myID) {
+                    usersAPI.addPost(props.myID, props.newPostText, 0).then(isOk => {
+                      props.addPost();
+                      props.addPostInProgress(false);
+                    });
+                  }
+                }}
+              >
+                Add post
+              </button>
               <button>Remove</button>
             </div>
           </div>

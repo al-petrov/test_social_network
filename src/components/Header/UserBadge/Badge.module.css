@@ -1,19 +1,18 @@
-.header{
-    grid-area: h;
-    background: hsla(120, 86%, 11%, 0.9) ;
-}
-  
-.header img {
-    width: 43px;
-    margin-top: 6px;
-    margin-left: 6px;
-}
-  
-.loginBlock {
-    float: right;
+.badge {
+  margin-right: 1vh;
+  vertical-align: middle;
 }
 
-.loginBlock a {
-    color: white;
+.badge img {
+  width: 35px;
+  height: 35px;
+  border-radius: 17px;
+  margin-top: 6px;
+  margin-left: 6px;
 }
- 
+
+.name {
+  margin-right: 3vh;
+  justify-content: center;
+  align-items: center;
+}

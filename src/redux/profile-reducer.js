@@ -2,12 +2,14 @@ const ADD_POST = 'ADD-POST';
 const ADD_SYMBOL_NEW_POST = 'ADD-SYMBOL-NEW-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_USER_POSTS = 'SET-USER-POSTS';
+const ADD_POST_IN_PROGRESS = 'ADD-POST-IN-PROGRESS';
 
 let initialState = {
   posts: [],
   newPostText: '',
   profile: null,
   myID: null,
+  addPostInProgress: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -22,7 +24,7 @@ const profileReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        posts: [...state.posts, newPost],
+        posts: [newPost, ...state.posts],
         newPostText: '',
       };
     case ADD_SYMBOL_NEW_POST:
@@ -40,6 +42,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         posts: action.posts,
       };
+    case ADD_POST_IN_PROGRESS:
+      return {
+        ...state,
+        addPostInProgress: action.isFetching,
+      };
     default:
       return state;
   }
@@ -55,5 +62,7 @@ export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, pr
 export const setUserPosts = posts => ({ type: SET_USER_POSTS, posts });
 
 export const addSymbolNewPost = text => ({ type: ADD_SYMBOL_NEW_POST, text });
+
+export const addPostInProgress = isFetching => ({ type: ADD_POST_IN_PROGRESS, isFetching });
 
 export default profileReducer;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addPost, addSymbolNewPost, setUserPosts } from '../../../redux/profile-reducer';
+import { addPost, addSymbolNewPost, setUserPosts, addPostInProgress } from '../../../redux/profile-reducer';
 import React from 'react';
 import axios from 'axios';
 import MyPosts from './MyPosts';
@@ -14,40 +14,12 @@ class MyPostsContainer extends React.Component {
     if (userId) {
       usersAPI.getPosts(userId).then(data => {
         this.props.setUserPosts(data.posts);
-        debugger;
-        // this.props.addPost(response.data);
       });
     }
   }
 
-  addPostMethod = () => {
-    if (this.props.myID) {
-      axios
-        .post(
-          `http://barabulka.site:8080/api/posts`,
-          {
-            userId: this.props.myID,
-            postText: this.props.newPostText,
-            likeCount: 0,
-          },
-          {
-            withCredentials: true,
-          },
-        )
-        .then(response => {
-          debugger;
-          addPost();
-        })
-        .catch(err => {
-          console.log('hi');
-
-          console.log(err.response);
-        });
-    }
-  };
-
   render() {
-    return <MyPosts {...this.props} addPost={this.addPostMethod} />;
+    return <MyPosts {...this.props} />;
   }
 }
 
@@ -55,6 +27,7 @@ let mapStateToProps = state => ({
   posts: state.profilePage.posts,
   newPostText: state.profilePage.newPostText,
   profile: state.profilePage.profile,
+  addPostIsFetching: state.profilePage.addPostInProgress,
 
   isAuth: state.auth.isAuth,
   myID: state.auth.myID,
@@ -66,4 +39,6 @@ let mapStateToProps = state => ({
 
 let withURLDataContainer = withRouter(MyPostsContainer);
 
-export default connect(mapStateToProps, { addSymbolNewPost, setUserPosts })(withURLDataContainer);
+export default connect(mapStateToProps, { addPost, addSymbolNewPost, setUserPosts, addPostInProgress })(
+  withURLDataContainer,
+);

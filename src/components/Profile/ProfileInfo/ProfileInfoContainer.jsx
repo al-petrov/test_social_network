@@ -10,7 +10,6 @@ class ProfileInfoContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
     if (!userId) userId = this.props.myID;
-
     if (userId) {
       usersAPI.getOneUser(userId).then(data => {
         this.props.setUserProfile(data, userId);

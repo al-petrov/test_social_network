@@ -22,7 +22,7 @@ const App = props => {
         <Navbar />
         <div className="app-wrapper-content">
           <Route path="/messages" render={() => <MyMessages />} />
-          <Route path="/profile/:userId?" render={() => <Profile />} />
+          <Route path="/profile/:userId?" render={() => <Profile {...props} />} />
           <Route path="/news" render={() => <News />} />
           <Route path="/music" render={() => <Music />} />
           <Route path="/settings" render={() => <SettingsContainer />} />

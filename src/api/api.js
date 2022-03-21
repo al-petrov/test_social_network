@@ -35,8 +35,23 @@ export const usersAPI = {
     return instance
       .get(`user/${userId}`)
       .then(response => {
-        debugger;
         return response.data;
+      })
+      .catch(err => {
+        console.log('hi');
+        console.log(err.response);
+      });
+  },
+
+  addPost(userId, postText, likeCount) {
+    return instance
+      .post(`http://barabulka.site:8080/api/posts`, {
+        userId,
+        postText,
+        likeCount,
+      })
+      .then(response => {
+        return true;
       })
       .catch(err => {
         console.log('hi');
