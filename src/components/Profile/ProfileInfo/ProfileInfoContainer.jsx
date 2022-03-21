@@ -4,6 +4,7 @@ import { setUserProfile } from '../../../redux/profile-reducer';
 import * as axios from 'axios';
 import { withRouter } from 'react-router';
 import ProfileInfo from './PofileInfo';
+import { usersAPI } from '../../../api/api';
 
 class ProfileInfoContainer extends React.Component {
   componentDidMount() {
@@ -11,8 +12,8 @@ class ProfileInfoContainer extends React.Component {
     if (!userId) userId = this.props.myID;
 
     if (userId) {
-      axios.get(`http://barabulka.site:8080/api/user/` + userId).then(response => {
-        this.props.setUserProfile(response.data, userId);
+      usersAPI.getOneUser(userId).then(data => {
+        this.props.setUserProfile(data, userId);
       });
     }
   }

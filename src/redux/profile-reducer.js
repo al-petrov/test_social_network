@@ -13,6 +13,7 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
+      debugger;
       let newPost = {
         id: state.posts.length + 1,
         text: state.newPostText,

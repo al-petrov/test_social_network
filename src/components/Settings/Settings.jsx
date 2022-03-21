@@ -24,10 +24,11 @@ let onSend = () => {
           response.data.img,
           response.data.userstatus,
         );
+        this.props.history.push('/profile');
       }
       if (response.data.isLogined === false) {
         alert(response.data.reason);
-        // this.props.history.push("/login")
+        this.props.history.push('/login');
         return;
       }
       this.props.toggleIsFetching(false);
@@ -49,21 +50,22 @@ let currentStatusInput = React.createRef();
 let currentImageInput = React.createRef();
 
 const Settings = props => {
+  debugger;
   return (
     <div className={m.loginComponent}>
       <div className={m.loginBlock}>
         {/* <div className={m.}> */}
         <div className={m.textLogin}>login:</div>
-        <input ref={currentLoginInput} className={m.inputLogin} />
+        <input ref={currentLoginInput} className={m.inputLogin} value="fgd" />
         <div className={m.textLogin}>username:</div>
-        <input ref={currentUsernameInput} className={m.inputLogin} />
+        <input ref={currentUsernameInput} className={m.inputLogin} value={props.userName} />
         <div className={m.textLogin}>country:</div>
-        <input ref={currentCountryInput} className={m.inputLogin} />
+        <input ref={currentCountryInput} className={m.inputLogin} value={props.country} />
 
         <div className={m.textLogin}>status:</div>
-        <input ref={currentStatusInput} className={m.inputLogin} />
+        <input ref={currentStatusInput} className={m.inputLogin} value={props.userStatus} />
         <div className={m.textLogin}>image:</div>
-        <input ref={currentImageInput} className={m.inputLogin} />
+        <input ref={currentImageInput} className={m.inputLogin} value={props.userImg} />
 
         <div className={m.textLogin}>password:</div>
         <input type={'password'} ref={currentPaswordInput} className={m.inputLogin} />
@@ -97,7 +99,7 @@ const Settings = props => {
                 }
                 if (response.data.isLogined === false) {
                   alert(response.data.reason);
-                  // this.props.history.push("/login")
+                  this.props.history.push('/login');
                   return;
                 }
                 this.props.toggleIsFetching(false);
