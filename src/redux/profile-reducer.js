@@ -1,3 +1,5 @@
+import { usersAPI } from '../api/api';
+
 const ADD_POST = 'ADD-POST';
 const ADD_SYMBOL_NEW_POST = 'ADD-SYMBOL-NEW-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
@@ -52,17 +54,44 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPost = () => {
+export const addPostAC = () => {
   return {
     type: ADD_POST,
   };
 };
-export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, profile: { ...profile, userId } });
 
-export const setUserPosts = posts => ({ type: SET_USER_POSTS, posts });
+export const setUserProfileAC = (profile, userId) => ({ type: SET_USER_PROFILE, profile: { ...profile, userId } });
+
+export const setUserPostsAC = posts => ({ type: SET_USER_POSTS, posts });
 
 export const addSymbolNewPost = text => ({ type: ADD_SYMBOL_NEW_POST, text });
 
 export const addPostInProgress = isFetching => ({ type: ADD_POST_IN_PROGRESS, isFetching });
+
+export const setUserProfile = userId => {
+  return dispatch => {
+    usersAPI.getOneUser(userId).then(data => {
+      dispatch(setUserProfileAC(data, userId));
+    });
+  };
+};
+
+export const setUserPosts = userId => {
+  return dispatch => {
+    usersAPI.getPosts(userId).then(data => {
+      dispatch(setUserPostsAC(data.posts));
+    });
+  };
+};
+
+export const addPost = (myID, newPostText) => {
+  return dispatch => {
+    dispatch(addPostInProgress(true));
+    usersAPI.addPost(myID, newPostText, 0).then(isOk => {
+      dispatch(addPostAC());
+      dispatch(addPostInProgress(false));
+    });
+  };
+};
 
 export default profileReducer;

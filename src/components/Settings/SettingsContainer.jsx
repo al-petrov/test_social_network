@@ -37,4 +37,4 @@ let mapStateToProps = state => ({
 
 let withUrlDataContainer = withRouter(SettingsContainer);
 
-export default connect(mapStateToProps, { setUserProfile, setAuthUserData })(withUrlDataContainer);
+export default connect(mapStateToProps, { setAuthUserData })(withUrlDataContainer);

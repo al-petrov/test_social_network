@@ -1,13 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  follow,
-  setUsers,
-  unfollow,
-  setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
-} from '../../redux/users-reducer';
+import { follow, unfollow, getUsers } from '../../redux/users-reducer';
 import Users from './UsersC';
 import Preloader from '../Common/Preloader/Preloader';
 import { withRouter } from 'react-router-dom';
@@ -15,27 +8,13 @@ import { usersAPI } from '../../api/api';
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
-    if (this.props.users.length === 0) {
-      this.props.toggleIsFetching(true);
-      usersAPI.getUsers(this.props.pageSize, this.props.currentPage).then(data => {
-        if (data.isLogined === false) {
-          this.props.history.push('/login');
-          return;
-        }
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(data.users);
-        this.props.setTotalUsersCount(data.count);
-      });
-    }
+    // if (this.props.users.length === 0) {
+    this.props.getUsers(this.props.pageSize, this.props.currentPage);
+    // }
   }
 
   onPageChanged = pageNumber => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    usersAPI.getUsers(this.props.pageSize, pageNumber).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.users);
-    });
+    this.props.getUsers(this.props.pageSize, pageNumber);
   };
 
   render() {
@@ -93,8 +72,5 @@ let withUrlUsersAPIComponent = withRouter(UsersAPIComponent);
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFetching,
+  getUsers,
 })(withUrlUsersAPIComponent);

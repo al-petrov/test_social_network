@@ -2,7 +2,6 @@ import React from 'react';
 import Preloader from '../../Common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 import NoFoto from '../../Common/Foto/NoFoto.png';
-// import MyPost from './MyPosts/MyPosts';
 
 const ProfileInfo = props => {
   if (!props.profile) {

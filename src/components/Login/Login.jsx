@@ -3,44 +3,6 @@ import m from './Login.module.css';
 import * as axios from 'axios';
 import { setAuthUserData } from '../../redux/auth-reducer';
 
-let onSend = () => {
-  axios
-    .post(
-      `http://barabulka.site:8080/api/login`,
-      {
-        login: currentLoginInput.current.value,
-        pas: currentPaswordInput.current.value,
-      },
-      {
-        withCredentials: true,
-      },
-    )
-    .then(response => {
-      if (response.data.isLogined === true) {
-        setAuthUserData(
-          response.data.id,
-          response.data.login,
-          response.data.username,
-          response.data.img,
-          response.data.userstatus,
-        );
-      }
-      if (response.data.isLogined === false) {
-        alert(response.data.reason);
-        // this.props.history.push("/login")
-        return;
-      }
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(response.data.users);
-      this.props.setTotalUsersCount(response.data.count);
-    })
-    .catch(err => {
-      console.log('hi');
-      console.log(err.response);
-    });
-  // props.messageChanged(currentMessageInput.current.value, getter);
-};
-
 let currentLoginInput = React.createRef();
 let currentPaswordInput = React.createRef();
 const Login = props => {

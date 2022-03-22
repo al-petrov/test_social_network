@@ -6,6 +6,7 @@ import axios from 'axios';
 import { usersAPI } from '../../../api/api';
 
 const MyPosts = props => {
+  debugger;
   let allPosts = props.posts.map(p => <Post message={p.text} likeCount={p.likeCount} />);
 
   let inputArea = props.profile ? props.profile.userId == props.myID : false;
@@ -32,13 +33,14 @@ const MyPosts = props => {
               <button
                 disabled={props.addPostIsFetching}
                 onClick={() => {
-                  props.addPostInProgress(true);
-                  if (props.myID) {
-                    usersAPI.addPost(props.myID, props.newPostText, 0).then(isOk => {
-                      props.addPost();
-                      props.addPostInProgress(false);
-                    });
-                  }
+                  props.addPost(props.myID);
+                  // props.addPostInProgress(true);
+                  // if (props.myID) {
+                  //   usersAPI.addPost(props.myID, props.newPostText, 0).then(isOk => {
+                  //     props.addPost();
+                  //     props.addPostInProgress(false);
+                  //   });
+                  // }
                 }}
               >
                 Add post

@@ -4,6 +4,7 @@ import ProfileInfoContainer from './ProfileInfo/ProfileInfoContainer';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 const Profile = props => {
+  debugger;
   return (
     <div className={p.thisContentWrapper}>
       <div className={p.profileWrapper}>
