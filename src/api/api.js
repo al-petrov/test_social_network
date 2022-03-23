@@ -59,3 +59,19 @@ export const usersAPI = {
       });
   },
 };
+
+export const authAPI = {
+  auth() {
+    return instance
+      .get('auth')
+      .then(response => {
+        if (response.data.isLogined === true) {
+          return response.data;
+        }
+      })
+      .catch(err => {
+        console.log('hi');
+        console.log(err.response);
+      });
+  },
+};

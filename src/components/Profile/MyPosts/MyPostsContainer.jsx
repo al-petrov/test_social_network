@@ -8,14 +8,9 @@ import { usersAPI } from '../../../api/api';
 
 class MyPostsContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.match.params.userId;
-    debugger;
+    let userId = this.props.match.params.userId || this.props.myID;
     if (userId) {
-      this.props.setUserPosts(userId, this.props.newPostText);
-      return;
-    }
-    if (this.props.myID) {
-      this.props.setUserPosts(this.props.myID, this.props.newPostText);
+      this.props.setUserPosts(userId);
     }
   }
 

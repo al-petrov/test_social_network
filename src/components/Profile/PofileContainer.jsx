@@ -3,10 +3,17 @@ import { connect } from 'react-redux';
 import Profile from './Pofile';
 import { addPost, setUserProfile } from '../../redux/profile-reducer';
 import * as axios from 'axios';
-import { withRouter } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
+import MyPosts from './MyPosts/MyPosts';
+import ProfileInfo from './ProfileInfo/PofileInfo';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
+    let userId = this.props.match.params.userId || this.props.myID;
+    debugger;
+    userId ? this.props.setUserProfile(userId) : false;
+    userId ? this.props.setUserPosts(userId) : false;
+
     // let userId = this.props.match.params.userId;
     // if (!userId) userId = this.props.myID;
     //
@@ -20,15 +27,28 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    return <Profile {...this.props} />;
+    return (
+      <div>
+        <ProfileInfo {...this.props} />
+        <MyPosts {...this.props} />
+      </div>
+    );
+    // <Profile {...this.props} />;
   }
 }
 
 let mapStateToProps = state => ({
   posts: state.profilePage.posts,
+  newPostText: state.profilePage.newPostText,
   profile: state.profilePage.profile,
+  addPostIsFetching: state.profilePage.addPostInProgress,
+
+  isAuth: state.auth.isAuth,
   myID: state.auth.myID,
-  a: 13,
+  userName: state.auth.userName,
+  userStatus: state.auth.userStatus,
+  userImg: state.auth.userImg,
+  login: state.auth.login,
 });
 
 let withUrlDataContainer = withRouter(ProfileContainer);

@@ -6,11 +6,18 @@ import ProfileInfo from './PofileInfo';
 
 class ProfileInfoContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.match.params.userId;
+    let userId = this.props.match.params.userId || this.props.myID;
     debugger;
-    if (userId || this.props.myID) {
-      this.props.setUserProfile(userId || this.props.myID);
+    if (userId) {
+      this.props.setUserProfile(userId);
     }
+    // userId ? this.props.setUserPosts(userId) : false;
+
+    // let userId = this.props.match.params.userId;
+    // debugger;
+    // if (userId || this.props.myID) {
+    //   this.props.setUserProfile(userId || this.props.myID);
+    // }
   }
 
   render() {

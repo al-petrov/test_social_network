@@ -1,3 +1,6 @@
+import { authAPI } from '../api/api';
+import { setUserProfile, setUserPosts } from './profile-reducer';
+
 const SET_USER_DATA = 'SET-USER-DATA';
 
 const initialState = {
@@ -23,11 +26,22 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setAuthUserData = (myID, login, userName, userImg, userStatus) => ({
+export const setAuthUserDataAC = (myID, login, userName, userImg, userStatus) => ({
   type: SET_USER_DATA,
   data: { myID, login, userName, userStatus, userImg },
 });
 
-// export const setAuthUserData = (userId, login) => ({ type: SET_USER_DATA, data: { userId, login }})
+export const setAuthUserData = () => {
+  debugger;
+  return dispatch => {
+    authAPI.auth().then(response => {
+      if (response && response.isLogined) {
+        dispatch(setAuthUserDataAC(response.id, response.login, response.username, response.img, response.userstatus));
+        dispatch(setUserProfile(response.id));
+        dispatch(setUserPosts(response.id));
+      }
+    });
+  };
+};
 
 export default authReducer;

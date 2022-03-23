@@ -1,34 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as axios from 'axios';
 import { setAuthUserData } from '../../redux/auth-reducer';
-import { setUserProfile, setUserPosts } from '../../redux/profile-reducer';
 import Header from './Header';
 import { withRouter } from 'react-router-dom';
 
 class HeaderAPIComponent extends React.Component {
   componentDidMount() {
-    axios
-      .get(`http://barabulka.site:8080/api/auth`, {
-        withCredentials: true,
-      })
-      .then(response => {
-        if (response.data.isLogined === true) {
-          this.props.setAuthUserData(
-            response.data.id,
-            response.data.login,
-            response.data.username,
-            response.data.img,
-            response.data.userstatus,
-          );
-          this.props.setUserProfile(response.data.id);
-          this.props.setUserPosts(response.data.id);
-        }
-      })
-      .catch(err => {
-        console.log('hi');
-        console.log(err.response);
-      });
+    this.props.setAuthUserData();
   }
   render() {
     return <Header {...this.props} />;
@@ -46,4 +24,4 @@ const mapStateToProps = state => ({
 
 let withUrlHeaderAPIComponent = withRouter(HeaderAPIComponent);
 
-export default connect(mapStateToProps, { setAuthUserData, setUserProfile, setUserPosts })(withUrlHeaderAPIComponent);
+export default connect(mapStateToProps, { setAuthUserData })(withUrlHeaderAPIComponent);

@@ -9,6 +9,7 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Profile from './components/Profile/Pofile';
 import LoginContainer from './components/Login/LoginContainer';
+import ProfileContainer from './components/Profile/ProfileInfo/ProfileInfoContainer';
 
 const App = props => {
   return (
