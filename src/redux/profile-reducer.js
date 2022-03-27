@@ -22,7 +22,7 @@ const profileReducer = (state = initialState, action) => {
       let newPost = {
         id: state.posts.length + 1,
         text: state.newPostText,
-        userimg: state.userImg,
+        userimg: state.profile.img,
         likeCount: 0,
       };
 
