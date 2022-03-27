@@ -4,7 +4,6 @@ import NoFoto from '../Common/Foto/NoFoto.png';
 import { NavLink } from 'react-router-dom';
 
 const Users = props => {
-  debugger;
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {

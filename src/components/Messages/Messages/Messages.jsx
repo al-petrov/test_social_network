@@ -5,9 +5,8 @@ import { AddSymbolNewMesssageActionCreator, SendMessageActionCreator } from '../
 import { useRouteMatch } from 'react-router';
 
 const Messages = props => {
-  let match = useRouteMatch();
-
-  let getter = window.location.pathname.substring(10, window.location.pathname.length);
+  // let getter = window.location.pathname.substring(10, window.location.pathname.length);
+  let getter = props.match.params.userId;
 
   let findMessage = '';
   for (let item of props.state.newMessages) {
@@ -18,34 +17,17 @@ const Messages = props => {
   }
 
   let sendMessage = () => {
-    props.sendMessage(currentMessageInput.current.value, getter);
+    props.sendMessage(props.myID, props.state.getterId, currentMessageInput.current.value);
     // let text = currentMessageInput.current.value;
     //
     // props.dispatch(SendMessageActionCreator(text, getter));
   };
-  let currentMessages = [];
-  for (let item of props.state.messagesData) {
-    if (
-      (item.senderId === getter && item.getterId === props.state.myID) ||
-      (item.senderId === props.state.myID && item.getterId === getter)
-    ) {
-      currentMessages.push(item);
-    }
-  }
-  currentMessages.sort(function (a, b) {
-    if (a.date > b.date) {
-      return 1;
-    }
-    if (a.date < b.date) {
-      return -1;
-    }
-    return 0;
-  });
-  let messageElements = currentMessages.map(function (message) {
-    let whoIs = message.senderId === props.state.myID ? 'myMessages' : 'yourMessages';
+
+  let messageElements = props.state.messagesData.map(function (message) {
+    let whoIs = message.sender_id == props.myID ? 'myMessages' : 'yourMessages';
     return (
       <div className={m[whoIs]}>
-        <Message id={message.id} message={message.message} />
+        <Message {...message} />
       </div>
     );
   });

@@ -4,13 +4,12 @@ import { follow, unfollow, getUsers } from '../../redux/users-reducer';
 import Users from './UsersC';
 import Preloader from '../Common/Preloader/Preloader';
 import { withRouter } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class UsersAPIComponent extends React.Component {
   componentDidMount() {
-    // if (this.props.users.length === 0) {
     this.props.getUsers(this.props.pageSize, this.props.currentPage);
-    // }
   }
 
   onPageChanged = pageNumber => {
@@ -45,32 +44,12 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return ({
-//         follow: (userId) => {
-//             dispatch(followAC(userId));
-//         },
-//         unfollow: (userId) => {
-//             dispatch(unfollowAC(userId));
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users));
-//         },
-//         setCurrentPage: (currentPage) => {
-//             dispatch(setCurrentPageAC(currentPage));
-//         },
-//         setTotalUsersCount: (totalUsersCount) => {
-//             dispatch(setTotalUsersCountAC(totalUsersCount));
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetchingAC(isFetching));
-//         }
-//     })
-// }
-let withUrlUsersAPIComponent = withRouter(UsersAPIComponent);
-
-export default connect(mapStateToProps, {
-  follow,
-  unfollow,
-  getUsers,
-})(withUrlUsersAPIComponent);
+export default compose(
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    getUsers,
+  }),
+  withAuthRedirect,
+  withRouter,
+)(UsersAPIComponent);

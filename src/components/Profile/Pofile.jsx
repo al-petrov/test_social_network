@@ -1,17 +1,16 @@
 import React from 'react';
 import p from './Profile.module.css';
-import ProfileInfoContainer from './ProfileInfo/ProfileInfoContainer';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
+import ProfileInfo from './ProfileInfo/PofileInfo';
+import MyPosts from './MyPosts/MyPosts';
 
 const Profile = props => {
-  debugger;
   return (
     <div className={p.thisContentWrapper}>
       <div className={p.profileWrapper}>
-        <ProfileInfoContainer {...props} />
+        <ProfileInfo {...props} />
       </div>
       <div className={p.postsWrapper}>
-        <MyPostsContainer {...props} />
+        <MyPosts {...props} />
       </div>
     </div>
   );

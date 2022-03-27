@@ -4,7 +4,7 @@ import Login from './Login';
 import { setUserProfile } from '../../redux/profile-reducer';
 import { setAuthUserData } from '../../redux/auth-reducer';
 import * as axios from 'axios';
-import { withRouter } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 
 class LoginContainer extends React.Component {
   componentDidMount() {
@@ -18,6 +18,7 @@ class LoginContainer extends React.Component {
   }
 
   render() {
+    // if (!this.props.isAuth) return <Redirect to="profile" />;
     return <Login {...this.props} />;
   }
 }

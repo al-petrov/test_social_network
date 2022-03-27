@@ -32,7 +32,6 @@ export const setAuthUserDataAC = (myID, login, userName, userImg, userStatus) =>
 });
 
 export const setAuthUserData = () => {
-  debugger;
   return dispatch => {
     authAPI.auth().then(response => {
       if (response && response.isLogined) {

@@ -1,22 +1,26 @@
-import React from "react";
+import React from 'react';
 import m from './MyMessages.module.css';
-import DialogsContainer from "./Dialogs/DialogsContainer";
-import MessagesContainer from "./Messages/MessagesContainer";
+import Dialogs from './Dialogs/Dialogs';
+import Messages from './Messages/Messages';
+import ChooseUser from './ChooseUser';
 
-const MyMessages = (props) => {
-
-    return (
-        <div className={m.myMessages}>
-            <div className={m.bacgr}>
-                <div className={m.dialogsBar}>
-                    <DialogsContainer />
-                </div>
-            </div>
-            <div className={m.messages}>
-                <MessagesContainer />
-            </div>
+const MyMessages = props => {
+  return (
+    <div className={m.myMessages}>
+      <div className={m.bacgr}>
+        <div className={m.dialogsBar}>
+          <Dialogs {...props} />
         </div>
-    )
-}
+      </div>
+      {props.myID && props.state.getterId ? (
+        <div className={m.messages}>
+          <Messages {...props} />
+        </div>
+      ) : (
+        <ChooseUser />
+      )}
+    </div>
+  );
+};
 
 export default MyMessages;

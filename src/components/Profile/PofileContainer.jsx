@@ -1,41 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Pofile';
-import { addPost, setUserProfile } from '../../redux/profile-reducer';
-import * as axios from 'axios';
-import { Redirect, withRouter } from 'react-router';
-import MyPosts from './MyPosts/MyPosts';
-import ProfileInfo from './ProfileInfo/PofileInfo';
+import {
+  addPost,
+  setUserProfile,
+  addSymbolNewPost,
+  setUserPosts,
+  addPostInProgress,
+} from '../../redux/profile-reducer';
+import { withRouter } from 'react-router';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId || this.props.myID;
-    debugger;
-    userId ? this.props.setUserProfile(userId) : false;
-    userId ? this.props.setUserPosts(userId) : false;
 
-    // let userId = this.props.match.params.userId;
-    // if (!userId) userId = this.props.myID;
-    //
-    // if (userId) {
-    //   axios.get(`http://barabulka.site:8080/api/user/` + userId)
-    //     .then(response => {
-    //
-    //       this.props.setUserProfile(response.data, userId);
-    //     })
-    //}
+    if (userId) {
+      this.props.setUserProfile(userId);
+    }
+    if (userId) {
+      this.props.setUserPosts(userId);
+    }
   }
 
   render() {
-    return (
-      <div>
-        <ProfileInfo {...this.props} />
-        <MyPosts {...this.props} />
-      </div>
-    );
-    // <Profile {...this.props} />;
+    // if (!this.props.isAuth) return <Redirect to="login" />;
+    return <Profile {...this.props} />;
   }
 }
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 let mapStateToProps = state => ({
   posts: state.profilePage.posts,
@@ -43,7 +38,6 @@ let mapStateToProps = state => ({
   profile: state.profilePage.profile,
   addPostIsFetching: state.profilePage.addPostInProgress,
 
-  isAuth: state.auth.isAuth,
   myID: state.auth.myID,
   userName: state.auth.userName,
   userStatus: state.auth.userStatus,
@@ -51,6 +45,16 @@ let mapStateToProps = state => ({
   login: state.auth.login,
 });
 
-let withUrlDataContainer = withRouter(ProfileContainer);
+compose(
+  connect(mapStateToProps, { setUserProfile, addPost, addSymbolNewPost, setUserPosts, addPostInProgress }),
+  withAuthRedirect,
+  withRouter,
+)(ProfileContainer);
 
-export default connect(mapStateToProps, { setUserProfile, addPost })(withUrlDataContainer);
+let withUrlDataContainer = AuthRedirectComponent;
+
+export default compose(
+  connect(mapStateToProps, { setUserProfile, addPost, addSymbolNewPost, setUserPosts, addPostInProgress }),
+  withAuthRedirect,
+  withRouter,
+)(ProfileContainer);

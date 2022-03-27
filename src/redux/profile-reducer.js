@@ -1,4 +1,4 @@
-import { usersAPI } from '../api/api';
+import { profileAPI } from '../api/api';
 
 const ADD_POST = 'ADD-POST';
 const ADD_SYMBOL_NEW_POST = 'ADD-SYMBOL-NEW-POST';
@@ -11,16 +11,18 @@ let initialState = {
   newPostText: '',
   profile: null,
   myID: null,
+  isAuth: false,
+  userImg: undefined,
   addPostInProgress: false,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      debugger;
       let newPost = {
         id: state.posts.length + 1,
         text: state.newPostText,
+        userimg: state.userImg,
         likeCount: 0,
       };
 
@@ -70,7 +72,7 @@ export const addPostInProgress = isFetching => ({ type: ADD_POST_IN_PROGRESS, is
 
 export const setUserProfile = userId => {
   return dispatch => {
-    usersAPI.getOneUser(userId).then(data => {
+    profileAPI.getOneUser(userId).then(data => {
       dispatch(setUserProfileAC(data, userId));
     });
   };
@@ -78,7 +80,7 @@ export const setUserProfile = userId => {
 
 export const setUserPosts = userId => {
   return dispatch => {
-    usersAPI.getPosts(userId).then(data => {
+    profileAPI.getPosts(userId, 1, 5).then(data => {
       dispatch(setUserPostsAC(data.posts));
     });
   };
@@ -87,7 +89,7 @@ export const setUserPosts = userId => {
 export const addPost = (myID, newPostText) => {
   return dispatch => {
     dispatch(addPostInProgress(true));
-    usersAPI.addPost(myID, newPostText, 0).then(isOk => {
+    profileAPI.addPost(myID, newPostText, 0).then(isOk => {
       dispatch(addPostAC());
       dispatch(addPostInProgress(false));
     });
