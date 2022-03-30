@@ -45,18 +45,12 @@ const dialogsReducer = (state = initialState, action) => {
         dialogsData: action.data,
       };
     case SEND_MESSAGE:
-      let newMes = {
-        id: state.messagesData.length + 1,
-        senderId: state.myID,
-        getterId: action.getterId,
-        message: action.message,
-        date: Date.now(),
-      };
-      stateCopy.messagesData = [...state.messagesData, newMes];
-      stateCopy.newMessages = [...state.newMessages];
-      let myIndex = stateCopy.newMessages.findIndex(item => item.getterId === item.getter);
+      let myIndex = state.newMessages.findIndex(item => item.getterId === action.getterId);
       stateCopy.newMessages.splice(myIndex, 1);
-      return stateCopy;
+      return {
+        ...state,
+        newMessages: state.newMessages.splice(myIndex, 1),
+      };
     case ADD_SIMBOL_NEW_MESSAGE:
       stateCopy.newMessages = [...state.newMessages];
       for (let item of stateCopy.newMessages) {
@@ -79,11 +73,10 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const SendMessageAC = (text, getter) => {
+export const sendMessageAC = getterId => {
   return {
     type: SEND_MESSAGE,
-    getterId: getter,
-    message: text,
+    getterId: getterId,
   };
 };
 
@@ -104,8 +97,8 @@ export const AddSymbolNewMesssageActionCreator = (text, getter) => {
 
 export const setMessageDataAC = (getterId, data) => {
   return {
-    getterId: getterId,
     type: SET_MESSAGE_DATA,
+    getterId: getterId,
     data: data,
   };
 };
@@ -137,6 +130,7 @@ export const SendMessage = (myId, getterId, messagetext, senddate) => {
     messagesAPI.addMessage(myId, getterId, messagetext, senddate).then(isOk => {
       debugger;
       if (isOk) {
+        dispatch(sendMessageAC(getterId));
         dispatch(setMessageData(myId, getterId));
       }
     });

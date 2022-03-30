@@ -7,6 +7,7 @@ import {
   addSymbolNewPost,
   setUserPosts,
   addPostInProgress,
+  setStatus,
 } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
@@ -54,7 +55,7 @@ compose(
 let withUrlDataContainer = AuthRedirectComponent;
 
 export default compose(
-  connect(mapStateToProps, { setUserProfile, addPost, addSymbolNewPost, setUserPosts, addPostInProgress }),
+  connect(mapStateToProps, { setUserProfile, addPost, addSymbolNewPost, setUserPosts, addPostInProgress, setStatus }),
   withAuthRedirect,
   withRouter,
 )(ProfileContainer);

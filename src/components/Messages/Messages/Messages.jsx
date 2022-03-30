@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import m from './Messages.module.css';
 import Message from './Message/Message';
 import { AddSymbolNewMesssageActionCreator, SendMessageActionCreator } from '../../../redux/dialogs-reducer';
 import { useRouteMatch } from 'react-router';
 
 const Messages = props => {
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [props.state.messagesData]);
+
   // let getter = window.location.pathname.substring(10, window.location.pathname.length);
   let getter = props.match.params.userId;
 
@@ -43,6 +53,7 @@ const Messages = props => {
         <div id={'myPage'} className={m.justifier}>
           {messageElements}
         </div>
+        <div ref={messagesEndRef} />
       </div>
       <div>
         <textarea

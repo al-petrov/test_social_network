@@ -1,51 +1,58 @@
 .loginBlock {
-
-    /*  */
-
-    display: flexbox;
-    /* align-items: center; */
-    grid-template-columns: 1fr;
-    min-width: auto;
-    max-width: 300px;
-    /* align-items: center; */
-    justify-self: center;
-
+  /* display: flexbox; */
+  /* grid-template-columns: 1fr; */
+  min-width: auto;
+  /* max-width: 300px; */
+  justify-self: center;
+  margin-top: 20vh;
 }
 
 .inputLogin {
-    background: transparent;
-    color: rgb(253, 172, 21);
-    border-color: orange;
-    border-width: 4px;
-    border-radius: 10px;
-    font-size: x-large;
-    text-align: center;
-    margin: 1vh;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  border-color: orange;
+  border-width: 4px;
+  border-radius: 10px;
+  font-size: x-large;
+  text-align: center;
+  margin: 1vh;
 }
 
 .textLogin {
-    background: transparent;
-    color: rgb(253, 172, 21);
-    border-color: orange;
-    border-width: 4px;
-    border-radius: 10px;
-    font-size: x-large;
-    text-align: center;
-    margin: 1vh;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  border-width: 4px;
+  border-radius: 10px;
+  font-size: x-large;
+  text-align: center;
+}
+
+.loginFields {
+  background: transparent;
+  color: white;
+  /* border-color: orange; */
+  border-width: 4px;
+  border-radius: 10px;
+  font-size: x-large;
+  text-align: center;
+  margin: 1vh;
+}
+
+.loginFields a {
+  color: white;
 }
 
 .buttonSend {
-    width: 100%;
-    background: transparent;
-    color: orange;
-    height: auto;
-    font-size: x-large;
-    margin: 1vh;
-    margin-top: 3vh;
-    min-height: 6vh;
+  width: 100%;
+  background: transparent;
+  color: rgb(255, 255, 255);
+  height: auto;
+  font-size: x-large;
+  /* margin: 1vh; */
+  margin-top: 3vh;
+  min-height: 6vh;
 }
 
 .loginComponent {
-    
-    display: grid;
+  display: grid;
 }

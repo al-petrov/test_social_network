@@ -2,10 +2,12 @@ import React from 'react';
 import m from './Login.module.css';
 import * as axios from 'axios';
 import { setAuthUserData } from '../../redux/auth-reducer';
+import { reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 
 let currentLoginInput = React.createRef();
 let currentPaswordInput = React.createRef();
-const Login = props => {
+const LoginOld = props => {
   return (
     <div className={m.loginComponent}>
       <div className={m.loginBlock}>
@@ -16,47 +18,56 @@ const Login = props => {
         <input type={'password'} ref={currentPaswordInput} className={m.inputLogin} />
         <button
           onClick={() => {
-            axios
-              .post(
-                `http://barabulka.site:8080/api/login`,
-                {
-                  login: currentLoginInput.current.value,
-                  pas: currentPaswordInput.current.value,
-                },
-                {
-                  withCredentials: true,
-                },
-              )
-              .then(response => {
-                if (response.data.isLogined === true) {
-                  props.setAuthUserData(
-                    response.data.id,
-                    response.data.login,
-                    response.data.username,
-                    response.data.img,
-                    response.data.userstatus,
-                  );
-                  props.history.push('/profile');
-                }
-                if (response.data.isLogined === false) {
-                  alert(response.data.reason);
-                  // this.props.history.push("/login")
-                  return;
-                }
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.users);
-                this.props.setTotalUsersCount(response.data.count);
-              })
-              .catch(err => {
-                console.log('hi');
-                console.log(err.response);
-              });
+            props.login();
           }}
           className={m.buttonSend}
         >
           ENTER
         </button>
       </div>
+    </div>
+  );
+};
+
+const LoginForm = props => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={m.loginComponent}>
+        <div className={m.loginBlock}>
+          <h1 className={m.inputLogin}>Login</h1>
+          <div className={m.textLogin}>
+            <Field className={m.loginFields} placeholder={'login'} name={'login'} component={'input'} />
+          </div>
+          <div className={m.textLogin}>
+            <Field
+              className={m.loginFields}
+              type={'password'}
+              placeholder={'password'}
+              name={'password'}
+              component={'input'}
+            />
+          </div>
+          <div className={m.textLogin}>
+            <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
+          </div>
+          <div>
+            <button className={m.buttonSend}>Login</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+const LodinReduxForm = reduxForm({ form: 'login' })(LoginForm);
+
+const Login = props => {
+  const onSubmit = formData => {
+    props.login(formData.login, formData.password, formData.rememberMe);
+  };
+  return (
+    <div>
+      <LodinReduxForm onSubmit={onSubmit} />
     </div>
   );
 };

@@ -2,23 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Login from './Login';
 import { setUserProfile } from '../../redux/profile-reducer';
-import { setAuthUserData } from '../../redux/auth-reducer';
+import { setAuthUserData, login } from '../../redux/auth-reducer';
 import * as axios from 'axios';
 import { Redirect, withRouter } from 'react-router';
 
 class LoginContainer extends React.Component {
-  componentDidMount() {
-    // let userId = this.props.match.params.userId;
-    // if (!userId) userId = this.props.myID;
-    // axios.get(`http://barabulka.site:8080/api/user/` + userId)
-    //     .then(response => {
-    //
-    //         this.props.setUserProfile(response.data);
-    //     })
+  componentDidMount() {}
+
+  componentDidUpdate() {
+    if (this.props.isAuth) {
+      this.props.history.push('/profile');
+    }
   }
 
   render() {
-    // if (!this.props.isAuth) return <Redirect to="profile" />;
     return <Login {...this.props} />;
   }
 }
@@ -36,4 +33,4 @@ let mapStateToProps = state => ({
 
 let withUrlDataContainer = withRouter(LoginContainer);
 
-export default connect(mapStateToProps, { setUserProfile, setAuthUserData })(withUrlDataContainer);
+export default connect(mapStateToProps, { setUserProfile, setAuthUserData, login })(withUrlDataContainer);

@@ -48,6 +48,12 @@ export const authAPI = {
         console.log(err.response);
       });
   },
+
+  login(login, password, rememberMe) {
+    return instance.post(`login`, { login, password }).then(response => {
+      return response.data;
+    });
+  },
 };
 
 export const messagesAPI = {
@@ -125,7 +131,7 @@ export const profileAPI = {
   setUserStatus(myID, status) {
     return instance
       .put('user', {
-        myID,
+        id: myID,
         username: null,
         country: null,
         userstatus: status,

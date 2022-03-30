@@ -13,8 +13,8 @@ const Message = props => {
   let date = new Date(props.senddate).toLocaleDateString('ru', options);
   return (
     <div className={m.message}>
-      <div>{props.messagetext}</div>
-      <div>{date}</div>
+      <div className={m.messageText}>{props.messagetext}</div>
+      <div className={m.dateText}>{date}</div>
     </div>
   );
 };
