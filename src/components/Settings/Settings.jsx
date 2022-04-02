@@ -1,81 +1,94 @@
 import React from 'react';
 import m from './Settings.module.css';
-import * as axios from 'axios';
-import { setAuthUserData } from '../../redux/auth-reducer';
+import { Field } from 'redux-form';
+import { reduxForm } from 'redux-form';
+import { maxLengthCreator, required } from '../../utils/validators';
+import { Input } from '../Common/FormsControls/FormsControl';
 
-let currentLoginInput = React.createRef();
-let currentPaswordInput = React.createRef();
-let currentUsernameInput = React.createRef();
-let currentCountryInput = React.createRef();
-let currentStatusInput = React.createRef();
-let currentImageInput = React.createRef();
+let maxLengthCreator25 = maxLengthCreator(25);
+let maxLengthCreator255 = maxLengthCreator(255);
+
+const SettingsForm = props => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={m.loginComponent}>
+        <div className={m.loginBlock}>
+          {/* <div className={m.}> */}
+          <div className={m.textLogin}>login:</div>
+          <Field
+            className={m.inputLogin}
+            placeholder={'login'}
+            name={'login'}
+            component={Input}
+            validate={[required, maxLengthCreator25]}
+          />
+          <div className={m.textLogin}>username:</div>
+          <Field
+            className={m.inputLogin}
+            placeholder={'user name'}
+            name={'username'}
+            component={Input}
+            validate={[required, maxLengthCreator255]}
+          />
+          <div className={m.textLogin}>country:</div>
+          <Field
+            className={m.inputLogin}
+            placeholder={'country'}
+            name={'country'}
+            component={Input}
+            validate={[required, maxLengthCreator255]}
+          />
+          <div className={m.textLogin}>status:</div>
+          <Field
+            className={m.inputLogin}
+            placeholder={'status'}
+            name={'status'}
+            component={Input}
+            validate={[required, maxLengthCreator255]}
+          />
+          <div className={m.textLogin}>image:</div>
+          <Field
+            className={m.inputLogin}
+            placeholder={'image'}
+            name={'image'}
+            component={Input}
+            validate={[required, maxLengthCreator255]}
+          />
+          <button className={m.buttonSend}>ENTER</button>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+const SettingsReduxForm = reduxForm({ form: 'settings' })(SettingsForm);
 
 const Settings = props => {
+  const onSubmit = formData => {
+    if (formData.image && formData.image.length > 255) {
+      alert('cant set fields over 255 symbols!');
+    } else {
+      props.updateUserData(
+        props.myID,
+        // formData.login || null,
+        formData.country || null,
+        formData.username || null,
+        formData.image || null,
+        formData.status || null,
+      );
+    }
+  };
   return (
-    <div className={m.loginComponent}>
-      <div className={m.loginBlock}>
-        {/* <div className={m.}> */}
-        <div className={m.textLogin}>login:</div>
-        <input ref={currentLoginInput} className={m.inputLogin} value="fgd" />
-        <div className={m.textLogin}>username:</div>
-        <input ref={currentUsernameInput} className={m.inputLogin} value={props.userName} />
-        <div className={m.textLogin}>country:</div>
-        <input ref={currentCountryInput} className={m.inputLogin} value={props.country} />
-
-        <div className={m.textLogin}>status:</div>
-        <input ref={currentStatusInput} className={m.inputLogin} value={props.userStatus} />
-        <div className={m.textLogin}>image:</div>
-        <input ref={currentImageInput} className={m.inputLogin} value={props.userImg} />
-
-        <div className={m.textLogin}>password:</div>
-        <input type={'password'} ref={currentPaswordInput} className={m.inputLogin} />
-        <button
-          onClick={() => {
-            axios
-              .put(
-                `http://barabulka.site:8080/api/user`,
-                {
-                  id: props.myID,
-                  username: currentUsernameInput.current.value,
-                  country: currentCountryInput.current.value,
-                  userstatus: currentStatusInput.current.value,
-                  login: currentLoginInput.current.value,
-                  img: currentImageInput.current.value,
-                },
-                {
-                  withCredentials: true,
-                },
-              )
-              .then(response => {
-                if (response.data.isLogined === true) {
-                  props.setAuthUserData(
-                    response.data.id,
-                    response.data.login,
-                    response.data.username,
-                    response.data.img,
-                    response.data.userstatus,
-                  );
-                  props.history.push('/profile');
-                }
-                if (response.data.isLogined === false) {
-                  alert(response.data.reason);
-                  this.props.history.push('/login');
-                  return;
-                }
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.users);
-                this.props.setTotalUsersCount(response.data.count);
-              })
-              .catch(err => {
-                console.log('hi');
-                console.log(err.response);
-              });
-          }}
-          className={m.buttonSend}
-        >
-          ENTER
-        </button>
-      </div>
+    <div>
+      <SettingsReduxForm
+        onSubmit={onSubmit}
+        initialValues={{
+          login: props.login,
+          username: props.userName,
+          status: props.userStatus,
+          image: props.userImg,
+        }}
+      />
     </div>
   );
 };

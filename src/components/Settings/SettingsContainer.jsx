@@ -1,26 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Settings from './Settings';
-import { setUserProfile } from '../../redux/profile-reducer';
-import { setAuthUserData } from '../../redux/auth-reducer';
-import * as axios from 'axios';
+import { updateUserData } from '../../redux/auth-reducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { withRouter } from 'react-router';
+import { compose } from 'redux';
 
 class SettingsContainer extends React.Component {
   componentDidMount() {
     if (this.props.myID) {
     }
-    // let userId = this.props.match.params.userId;
-    // if (!userId) userId = this.props.myID;
-    // axios.get(`http://barabulka.site:8080/api/user/` + userId)
-    //     .then(response => {
-    //
-    //         this.props.setUserProfile(response.data);
-    //     })
   }
 
   render() {
-    return <Settings {...this.props} />;
+    return <Settings {...this.props} updateUserData={this.props.updateUserData} />;
   }
 }
 
@@ -31,10 +24,8 @@ let mapStateToProps = state => ({
   userStatus: state.auth.userStatus,
   userImg: state.auth.userImg,
   login: state.auth.login,
-
-  a: 13,
 });
 
-let withUrlDataContainer = withRouter(SettingsContainer);
+// export default connect(mapStateToProps, { updateUserData })(SettingsContainer);
 
-export default connect(mapStateToProps, { setAuthUserData })(withUrlDataContainer);
+export default compose(connect(mapStateToProps, { updateUserData }), withRouter, withAuthRedirect)(SettingsContainer);

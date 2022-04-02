@@ -1,14 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Pofile';
-import {
-  addPost,
-  setUserProfile,
-  addSymbolNewPost,
-  setUserPosts,
-  addPostInProgress,
-  setStatus,
-} from '../../redux/profile-reducer';
+import { addPost, setUserProfile, setUserPosts, addPostInProgress, setStatus } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -26,16 +19,12 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    // if (!this.props.isAuth) return <Redirect to="login" />;
     return <Profile {...this.props} />;
   }
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
 let mapStateToProps = state => ({
   posts: state.profilePage.posts,
-  newPostText: state.profilePage.newPostText,
   profile: state.profilePage.profile,
   addPostIsFetching: state.profilePage.addPostInProgress,
 
@@ -46,16 +35,8 @@ let mapStateToProps = state => ({
   login: state.auth.login,
 });
 
-compose(
-  connect(mapStateToProps, { setUserProfile, addPost, addSymbolNewPost, setUserPosts, addPostInProgress }),
-  withAuthRedirect,
-  withRouter,
-)(ProfileContainer);
-
-let withUrlDataContainer = AuthRedirectComponent;
-
 export default compose(
-  connect(mapStateToProps, { setUserProfile, addPost, addSymbolNewPost, setUserPosts, addPostInProgress, setStatus }),
-  withAuthRedirect,
+  connect(mapStateToProps, { setUserProfile, addPost, setUserPosts, addPostInProgress, setStatus }),
   withRouter,
+  withAuthRedirect,
 )(ProfileContainer);

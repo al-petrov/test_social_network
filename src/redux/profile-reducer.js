@@ -9,7 +9,6 @@ const SET_USER_STATUS = 'SET-USER-STATUS';
 
 let initialState = {
   posts: [],
-  newPostText: '',
   profile: null,
   myID: null,
   isAuth: false,
@@ -22,14 +21,13 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       let newPost = {
         id: state.posts.length + 1,
-        text: state.newPostText,
+        text: action.newPostText,
         userimg: state.profile.img,
         likeCount: 0,
       };
       return {
         ...state,
         posts: [newPost, ...state.posts],
-        newPostText: '',
       };
     case ADD_SYMBOL_NEW_POST:
       return {
@@ -61,9 +59,10 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostAC = () => {
+export const addPostAC = newPostText => {
   return {
     type: ADD_POST,
+    newPostText,
   };
 };
 
@@ -72,8 +71,6 @@ export const setUserProfileAC = (profile, userId) => ({ type: SET_USER_PROFILE, 
 export const setUserPostsAC = posts => ({ type: SET_USER_POSTS, posts });
 
 export const setStatusAC = userstatus => ({ type: SET_USER_STATUS, userstatus });
-
-export const addSymbolNewPost = text => ({ type: ADD_SYMBOL_NEW_POST, text });
 
 export const addPostInProgress = isFetching => ({ type: ADD_POST_IN_PROGRESS, isFetching });
 
@@ -97,7 +94,7 @@ export const addPost = (myID, newPostText) => {
   return dispatch => {
     dispatch(addPostInProgress(true));
     profileAPI.addPost(myID, newPostText, 0).then(isOk => {
-      dispatch(addPostAC());
+      dispatch(addPostAC(newPostText));
       dispatch(addPostInProgress(false));
     });
   };

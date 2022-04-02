@@ -1,33 +1,7 @@
 import React from 'react';
 import m from './Login.module.css';
-import * as axios from 'axios';
-import { setAuthUserData } from '../../redux/auth-reducer';
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
-
-let currentLoginInput = React.createRef();
-let currentPaswordInput = React.createRef();
-const LoginOld = props => {
-  return (
-    <div className={m.loginComponent}>
-      <div className={m.loginBlock}>
-        {/* <div className={m.}> */}
-        <div className={m.textLogin}>login:</div>
-        <input ref={currentLoginInput} className={m.inputLogin} />
-        <div className={m.textLogin}>password:</div>
-        <input type={'password'} ref={currentPaswordInput} className={m.inputLogin} />
-        <button
-          onClick={() => {
-            props.login();
-          }}
-          className={m.buttonSend}
-        >
-          ENTER
-        </button>
-      </div>
-    </div>
-  );
-};
 
 const LoginForm = props => {
   return (

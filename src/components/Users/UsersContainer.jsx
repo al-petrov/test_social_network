@@ -50,6 +50,6 @@ export default compose(
     unfollow,
     getUsers,
   }),
-  withAuthRedirect,
   withRouter,
+  withAuthRedirect,
 )(UsersAPIComponent);

@@ -28,9 +28,6 @@ const Messages = props => {
 
   let sendMessage = () => {
     props.sendMessage(props.myID, props.state.getterId, currentMessageInput.current.value);
-    // let text = currentMessageInput.current.value;
-    //
-    // props.dispatch(SendMessageActionCreator(text, getter));
   };
 
   let messageElements = props.state.messagesData.map(function (message) {

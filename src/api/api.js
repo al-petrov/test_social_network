@@ -32,6 +32,24 @@ export const usersAPI = {
     console.log('use profileAPI object');
     profileAPI.addPost(userId, postText, likeCount);
   },
+
+  updateUserData(myID, username, country, userstatus, img) {
+    return instance
+      .put('user', {
+        id: myID,
+        username,
+        country,
+        userstatus,
+        img,
+      })
+      .then(response => {
+        return response.data;
+      })
+      .catch(err => {
+        console.log('hi');
+        console.log(err.response);
+      });
+  },
 };
 
 export const authAPI = {
