@@ -2,6 +2,11 @@ import React from 'react';
 import m from './Login.module.css';
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
+import { maxLengthCreator, required } from '../../utils/validators';
+import { Input } from '../Common/FormsControls/FormsControl';
+
+const maxLength25 = maxLengthCreator(25);
+const maxLength255 = maxLengthCreator(255);
 
 const LoginForm = props => {
   return (
@@ -9,18 +14,23 @@ const LoginForm = props => {
       <div className={m.loginComponent}>
         <div className={m.loginBlock}>
           <h1 className={m.inputLogin}>Login</h1>
-          <div className={m.textLogin}>
-            <Field className={m.loginFields} placeholder={'login'} name={'login'} component={'input'} />
-          </div>
-          <div className={m.textLogin}>
-            <Field
-              className={m.loginFields}
-              type={'password'}
-              placeholder={'password'}
-              name={'password'}
-              component={'input'}
-            />
-          </div>
+          <Field
+            className={m.loginFields}
+            placeholder={'login'}
+            name={'login'}
+            component={Input}
+            validate={[required, maxLength25]}
+          />
+          {/* <div className={m.textLogin}> */}
+          <Field
+            className={m.loginFields}
+            type={'password'}
+            placeholder={'password'}
+            name={'password'}
+            component={Input}
+            validate={[maxLength255]}
+          />
+          {/* </div> */}
           <div className={m.textLogin}>
             <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
           </div>

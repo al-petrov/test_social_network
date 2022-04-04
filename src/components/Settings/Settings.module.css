@@ -1,12 +1,7 @@
 .loginBlock {
-  /*  */
-
-  display: flexbox;
-  /* align-items: center; */
   grid-template-columns: 1fr;
   min-width: auto;
   max-width: 300px;
-  /* align-items: center; */
   justify-self: center;
 }
 

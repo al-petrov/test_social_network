@@ -5,4 +5,27 @@
 
 .formControl.error span {
   color: red;
+  justify-content: center;
+}
+
+.formControl {
+  display: grid;
+}
+
+.errorSpan {
+  display: grid;
+}
+
+.formControlTextarea {
+  max-width: 300px;
+}
+
+.formControlTextarea.error input,
+.formControlTextarea.error textarea {
+  border: solid red 2px;
+}
+
+.formControlTextarea.error span {
+  color: red;
+  justify-content: center;
 }

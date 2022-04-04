@@ -3,6 +3,31 @@ import m from './Messages.module.css';
 import Message from './Message/Message';
 import { AddSymbolNewMesssageActionCreator, SendMessageActionCreator } from '../../../redux/dialogs-reducer';
 import { useRouteMatch } from 'react-router';
+import { Field } from 'redux-form';
+import { Input } from '../../Common/FormsControls/FormsControl';
+import { maxLengthCreator } from '../../../utils/validators';
+import { reduxForm } from 'redux-form';
+
+let maxLength255 = maxLengthCreator(255);
+
+const NewMessageForm = props => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={m.newMessageForm}>
+        <Field
+          className={m.newMessageField}
+          placeholder={'message text'}
+          name={'newMessageText'}
+          component={Input}
+          validate={maxLength255}
+        />
+        <button className={m.newMessage}>send</button>
+      </div>
+    </form>
+  );
+};
+
+const NewMessageReduxForm = reduxForm({ form: 'newMessageForm' })(NewMessageForm);
 
 const Messages = props => {
   const messagesEndRef = useRef(null);
@@ -15,7 +40,6 @@ const Messages = props => {
     scrollToBottom();
   }, [props.state.messagesData]);
 
-  // let getter = window.location.pathname.substring(10, window.location.pathname.length);
   let getter = props.match.params.userId;
 
   let findMessage = '';
@@ -26,10 +50,6 @@ const Messages = props => {
     }
   }
 
-  let sendMessage = () => {
-    props.sendMessage(props.myID, props.state.getterId, currentMessageInput.current.value);
-  };
-
   let messageElements = props.state.messagesData.map(function (message) {
     let whoIs = message.sender_id == props.myID ? 'myMessages' : 'yourMessages';
     return (
@@ -39,11 +59,13 @@ const Messages = props => {
     );
   });
 
-  let onMessageChange = () => {
-    props.messageChanged(currentMessageInput.current.value, getter);
+  let onSubmit = formData => {
+    if (formData.newMessageText) {
+      props.sendMessage(props.myID, props.state.getterId, formData.newMessageText);
+      formData.newMessageText = '';
+    }
   };
 
-  let currentMessageInput = React.createRef();
   return (
     <div className={m.messages}>
       <div className={m.messageList}>
@@ -52,19 +74,7 @@ const Messages = props => {
         </div>
         <div ref={messagesEndRef} />
       </div>
-      <div>
-        <textarea
-          onChange={onMessageChange}
-          ref={currentMessageInput}
-          className={m.newMessageField}
-          value={findMessage}
-        />
-        {/* <div className={m.newMessage}> */}
-        <button onClick={sendMessage} className={m.newMessage}>
-          send
-        </button>
-      </div>
-      {/* </div> */}
+      <NewMessageReduxForm onSubmit={onSubmit} />
     </div>
   );
 };

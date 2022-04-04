@@ -12,12 +12,7 @@ let AddNewPostForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field
-          name="newPostText"
-          component={Textarea}
-          placeholder="add post here"
-          validate={[required, maxLengthNewPostText]}
-        />
+        <Field name="newPostText" component={Textarea} placeholder="add post here" validate={[maxLengthNewPostText]} />
         <button disabled={props.addPostIsFetching}>Add post</button>
       </div>
     </form>
@@ -34,7 +29,10 @@ const MyPosts = props => {
   let inputArea = props.profile ? props.profile.userId == props.myID : false;
 
   let addPost = values => {
-    props.addPost(props.myID, values.newPostText);
+    if (values.newPostText) {
+      props.addPost(props.myID, values.newPostText);
+      values.newPostText = '';
+    }
   };
 
   return (

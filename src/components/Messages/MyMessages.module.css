@@ -1,23 +1,23 @@
 .myMessages {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    /* align-items: end; */
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  /* align-items: end; */
 }
 
 .dialogsBar {
-    background: hsla(120, 86%, 11%, 0.9) ;
-    background-color: hsla(120, 97%, 49%, 0.3) ;
-    height: 95vh;
+  background: hsla(120, 86%, 11%, 0.9);
+  background-color: hsla(120, 97%, 49%, 0.3);
+  height: 95vh;
 }
 
 .messages {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: ifr;
-    align-items: end;
-    height: auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  align-items: end;
+  height: auto;
 }
 
 .bacgr {
-    background: hsla(120, 86%, 11%, 0.9) ;
+  background: hsla(120, 86%, 11%, 0.9);
 }

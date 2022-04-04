@@ -36,7 +36,7 @@ const SettingsForm = props => {
             placeholder={'country'}
             name={'country'}
             component={Input}
-            validate={[required, maxLengthCreator255]}
+            validate={[maxLengthCreator255]}
           />
           <div className={m.textLogin}>status:</div>
           <Field
@@ -44,7 +44,7 @@ const SettingsForm = props => {
             placeholder={'status'}
             name={'status'}
             component={Input}
-            validate={[required, maxLengthCreator255]}
+            validate={maxLengthCreator255}
           />
           <div className={m.textLogin}>image:</div>
           <Field
@@ -52,7 +52,7 @@ const SettingsForm = props => {
             placeholder={'image'}
             name={'image'}
             component={Input}
-            validate={[required, maxLengthCreator255]}
+            validate={[maxLengthCreator255]}
           />
           <button className={m.buttonSend}>ENTER</button>
         </div>
