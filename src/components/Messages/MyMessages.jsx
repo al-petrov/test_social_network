@@ -7,11 +7,8 @@ import ChooseUser from './ChooseUser';
 const MyMessages = props => {
   return (
     <div className={m.myMessages}>
-      <div className={m.bacgr}>
-        <div className={m.dialogsBar}>
-          <Dialogs {...props} />
-        </div>
-      </div>
+      <Dialogs {...props} />
+
       {props.myID && props.state.getterId ? (
         <div className={m.messages}>
           <Messages {...props} />

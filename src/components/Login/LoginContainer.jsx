@@ -4,13 +4,17 @@ import Login from './Login';
 import { setUserProfile } from '../../redux/profile-reducer';
 import { setAuthUserData, login } from '../../redux/auth-reducer';
 import { withRouter } from 'react-router';
+import { message } from 'antd';
 
 class LoginContainer extends React.Component {
   componentDidMount() {}
 
   componentDidUpdate() {
     if (this.props.isAuth) {
+      message.success('Success!');
       this.props.history.push(this.props.redirectAddress || '/profile');
+    } else {
+      message.error('error!');
     }
   }
 

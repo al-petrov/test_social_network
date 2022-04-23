@@ -1,15 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthUserData } from '../../redux/auth-reducer';
-import Header from './Header';
 import { withRouter } from 'react-router-dom';
+import Badge from './UserBadge/Badge';
 
 class HeaderAPIComponent extends React.Component {
-  componentDidMount() {
-    this.props.setAuthUserData();
-  }
   render() {
-    return <Header {...this.props} />;
+    return <Badge {...this.props} />;
   }
 }
 
@@ -24,4 +20,4 @@ const mapStateToProps = state => ({
 
 let withUrlHeaderAPIComponent = withRouter(HeaderAPIComponent);
 
-export default connect(mapStateToProps, { setAuthUserData })(withUrlHeaderAPIComponent);
+export default connect(mapStateToProps)(withUrlHeaderAPIComponent);

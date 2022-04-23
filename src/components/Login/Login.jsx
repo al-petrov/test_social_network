@@ -37,6 +37,7 @@ const LoginForm = props => {
           <div>
             <button className={m.buttonSend}>Login</button>
           </div>
+          {/* <div>{props.error ? message.error('error!') : ''}</div> */}
         </div>
       </div>
     </form>

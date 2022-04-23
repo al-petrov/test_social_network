@@ -2,7 +2,8 @@ import * as axios from 'axios';
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: 'http://barabulka.site:8080/api/',
+  // baseURL: 'http://barabulka.site:8080/api',
+  baseURL: 'https://barabulka.site/api/api/',
 });
 
 export const usersAPI = {

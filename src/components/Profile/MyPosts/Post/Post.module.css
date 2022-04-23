@@ -1,16 +1,15 @@
 .item {
-    color: yellow;
-    margin: 10px 10px 30px 10px;
+  color: rgb(0, 0, 0);
+  margin: 10px 10px 30px 10px;
 }
 
-.item img{
+.item img {
   width: 60px;
   height: 60px;
   border-radius: 30px;
 }
 
-.likes img{
+.likes img {
   width: 20px;
   height: 20px;
 }
-

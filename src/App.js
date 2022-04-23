@@ -9,30 +9,77 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import ProfileContainer from './components/Profile/PofileContainer';
+import { setAuthUserData } from './redux/auth-reducer';
+import 'antd/dist/antd.css';
 
-const App = props => {
-  return (
-    <div
-      style={{
-        backgroundImage: `url("https://i.redd.it/c3uhsgo1vx541.jpg")`,
-      }}
-    >
-      <div className="app-wrapper">
-        <HeaderContainer />
-        <Navbar />
-        <div className="app-wrapper-content">
-          <Route path="/messages/:userId?" render={() => <MyMessagesContainer />} />
-          <Route path="/profile/:userId?" render={() => <ProfileContainer {...props} />} />
-          <Route path="/news" render={() => <News />} />
-          <Route path="/music" render={() => <Music />} />
-          <Route path="/settings" render={() => <SettingsContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/login" render={() => <LoginContainer />} />
-        </div>
-        {/* <Footer /> */}
-      </div>
-    </div>
-  );
-};
+import { Button, Layout, Menu } from 'antd';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
-export default App;
+const { Header, Content, Footer, Sider } = Layout;
+
+class App extends Component {
+  componentDidMount() {
+    this.props.setAuthUserData();
+  }
+
+  render() {
+    return (
+      <Layout>
+        <Header className="header" style={{ padding: 0, minHeight: '7vh' }}>
+          <HeaderContainer />
+        </Header>
+        <Layout>
+          <Sider
+            style={{ minHeight: '93vh' }}
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={broken => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
+          >
+            <div className="logo" />
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+              <Menu.Item key="1" icon={<UserOutlined />}>
+                <Link to="/profile">Profile</Link>
+              </Menu.Item>
+              <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+                <NavLink to="/messages">Messages</NavLink>
+              </Menu.Item>
+              <Menu.Item key="3" icon={<UploadOutlined />}>
+                <NavLink to="/users">Users</NavLink>
+              </Menu.Item>
+              <Menu.Item key="4" icon={<UserOutlined />}>
+                <NavLink to="/settings">Settings</NavLink>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+          {/* <Header className="header" style={{ padding: 0 }} /> */}
+          <Content style={{ margin: '24px 16px 0' }}>
+            <div className="site-layout-background">
+              <Route path="/messages/:userId?" render={() => <MyMessagesContainer />} />
+              <Route path="/profile/:userId?" render={() => <ProfileContainer {...this.props} />} />
+              <Route path="/news" render={() => <News />} />
+              <Route path="/music" render={() => <Music />} />
+              <Route path="/settings" render={() => <SettingsContainer />} />
+              <Route path="/users" render={() => <UsersContainer />} />
+              <Route path="/login" render={() => <LoginContainer />} />
+            </div>
+          </Content>
+          {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
+        </Layout>
+        {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
+      </Layout>
+    );
+  }
+}
+
+export default compose(withRouter, connect(null, { setAuthUserData }))(App);

@@ -7,22 +7,20 @@ import { Field } from 'redux-form';
 import { Input } from '../../Common/FormsControls/FormsControl';
 import { maxLengthCreator } from '../../../utils/validators';
 import { reduxForm } from 'redux-form';
+import { Button, Space } from 'antd';
+import { SendOutlined } from '@ant-design/icons';
 
 let maxLength255 = maxLengthCreator(255);
 
 const NewMessageForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <div className={m.newMessageForm}>
-        <Field
-          className={m.newMessageField}
-          placeholder={'message text'}
-          name={'newMessageText'}
-          component={Input}
-          validate={maxLength255}
-        />
-        <button className={m.newMessage}>send</button>
-      </div>
+      <Space>
+        <Field placeholder={'message text'} name={'newMessageText'} component={Input} validate={maxLength255} />
+        <button type="primary" shape="circle" icon={<SendOutlined />}>
+          send
+        </button>
+      </Space>
     </form>
   );
 };
@@ -41,14 +39,6 @@ const Messages = props => {
   }, [props.state.messagesData]);
 
   let getter = props.match.params.userId;
-
-  let findMessage = '';
-  for (let item of props.state.newMessages) {
-    if (item.getterId == getter) {
-      findMessage = item.message;
-      break;
-    }
-  }
 
   let messageElements = props.state.messagesData.map(function (message) {
     let whoIs = message.sender_id == props.myID ? 'myMessages' : 'yourMessages';

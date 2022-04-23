@@ -1,7 +1,9 @@
+import { stopSubmit } from 'redux-form';
 import { authAPI, usersAPI } from '../api/api';
 import { setUserProfile, setUserPosts } from './profile-reducer';
 
 const SET_USER_DATA = 'SET-USER-DATA';
+const UNSET_USER_DATA = 'UNSET-USER-DATA';
 const SET_REDIRECT_ADDRESS = 'SET-REDIRECT-ADDRESS';
 
 const initialState = {
@@ -28,6 +30,11 @@ const authReducer = (state = initialState, action) => {
         ...action.data,
         isAuth: true,
       };
+    case UNSET_USER_DATA:
+      return {
+        ...state,
+        isAuth: false,
+      };
     default:
       return state;
   }
@@ -41,6 +48,10 @@ export const setRedirectAddressAC = redirectAddress => ({
 export const setAuthUserDataAC = (myID, login, userName, userImg, userStatus) => ({
   type: SET_USER_DATA,
   data: { myID, login, userName, userStatus, userImg },
+});
+
+export const unsetAuthUserDataAC = () => ({
+  type: UNSET_USER_DATA,
 });
 
 export const setAuthUserData = () => {
@@ -60,6 +71,9 @@ export const login = (login, password, rememberMe) => {
     authAPI.login(login, password, rememberMe).then(data => {
       if (data.isLogined) {
         dispatch(setAuthUserDataAC(data.id, data.login, data.username, data.img, data.userstatus));
+      } else {
+        let action = stopSubmit('login', { _error: 'wrong login or password' });
+        dispatch(action);
       }
     });
   };
