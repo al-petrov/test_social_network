@@ -4,6 +4,8 @@ import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import { maxLengthCreator, required } from '../../utils/validators';
 import { Input } from '../Common/FormsControls/FormsControl';
+import { Image } from 'antd';
+import SettingsImageUploader from './SettingsImageUploader';
 
 let maxLengthCreator25 = maxLengthCreator(25);
 let maxLengthCreator255 = maxLengthCreator(255);
@@ -47,13 +49,17 @@ const SettingsForm = props => {
             validate={maxLengthCreator255}
           />
           <div className={m.textLogin}>image:</div>
-          <Field
-            className={m.inputLogin}
-            placeholder={'image'}
-            name={'image'}
-            component={Input}
-            validate={[maxLengthCreator255]}
-          />
+          <div>
+            <Image width={200} src={props.initialValues.image} />
+            <Field
+              className={m.inputLogin}
+              placeholder={'image'}
+              name={'image'}
+              component={Input}
+              validate={[maxLengthCreator255]}
+            />
+            <SettingsImageUploader />
+          </div>
           <button className={m.buttonSend}>ENTER</button>
         </div>
       </div>

@@ -1,10 +1,12 @@
-import { stopSubmit } from 'redux-form';
+// import { stopSubmit } from 'redux-form';
 import { authAPI, usersAPI } from '../api/api';
 import { setUserProfile, setUserPosts } from './profile-reducer';
 
 const SET_USER_DATA = 'SET-USER-DATA';
 const UNSET_USER_DATA = 'UNSET-USER-DATA';
 const SET_REDIRECT_ADDRESS = 'SET-REDIRECT-ADDRESS';
+const ADD_ERROR = 'ADD-ERROR';
+const DELETE_ERROR = 'DELETE-ERROR';
 
 const initialState = {
   isAuth: false,
@@ -14,6 +16,7 @@ const initialState = {
   userImg: null,
   login: null,
   isFetching: false,
+  errors: [],
   redirectAddress: '',
 };
 
@@ -31,9 +34,19 @@ const authReducer = (state = initialState, action) => {
         isAuth: true,
       };
     case UNSET_USER_DATA:
+      return { initialState };
+    case ADD_ERROR:
       return {
         ...state,
-        isAuth: false,
+        errors: [...state.errors, action.error],
+      };
+    case DELETE_ERROR:
+      return {
+        ...state,
+        errors: [],
+        // state.errors.indexOf(action.error) != -1
+        //   ? state.errors.splice(state.errors.indexOf(action.error))
+        //   : state.errors,
       };
     default:
       return state;
@@ -45,6 +58,19 @@ export const setRedirectAddressAC = redirectAddress => ({
   redirectAddress,
 });
 
+export const addErrorAC = error => ({
+  type: ADD_ERROR,
+  error,
+});
+
+export const deleteErrorAC = () => ({
+  type: DELETE_ERROR,
+});
+
+export const deleteErrors = () => dispatch => {
+  return dispatch(deleteErrorAC());
+};
+
 export const setAuthUserDataAC = (myID, login, userName, userImg, userStatus) => ({
   type: SET_USER_DATA,
   data: { myID, login, userName, userStatus, userImg },
@@ -54,16 +80,14 @@ export const unsetAuthUserDataAC = () => ({
   type: UNSET_USER_DATA,
 });
 
-export const setAuthUserData = () => {
-  return dispatch => {
-    authAPI.auth().then(response => {
-      if (response && response.isLogined) {
-        dispatch(setAuthUserDataAC(response.id, response.login, response.username, response.img, response.userstatus));
-        dispatch(setUserProfile(response.id));
-        dispatch(setUserPosts(response.id));
-      }
-    });
-  };
+export const setAuthUserData = () => dispatch => {
+  return authAPI.auth().then(response => {
+    if (response && response.isLogined) {
+      dispatch(setAuthUserDataAC(response.id, response.login, response.username, response.img, response.userstatus));
+      dispatch(setUserProfile(response.id));
+      dispatch(setUserPosts(response.id));
+    }
+  });
 };
 
 export const login = (login, password, rememberMe) => {
@@ -72,8 +96,9 @@ export const login = (login, password, rememberMe) => {
       if (data.isLogined) {
         dispatch(setAuthUserDataAC(data.id, data.login, data.username, data.img, data.userstatus));
       } else {
-        let action = stopSubmit('login', { _error: 'wrong login or password' });
-        dispatch(action);
+        dispatch(addErrorAC('wrong login or password'));
+        // let action = stopSubmit('login', { _error: 'wrong login or password' });
+        // dispatch(action);
       }
     });
   };

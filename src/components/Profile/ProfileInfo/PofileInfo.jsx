@@ -3,6 +3,7 @@ import Preloader from '../../Common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 import NoFoto from '../../Common/Foto/NoFoto.png';
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHook from './ProfileStatusWithHook';
 
 const ProfileInfo = props => {
   if (!props.profile) {
@@ -20,7 +21,7 @@ const ProfileInfo = props => {
       <div className={s.descriptionBlock}>
         <h2>{props.profile.username}</h2>
         <h4>
-          <ProfileStatus {...props} />
+          <ProfileStatusWithHook {...props} />
         </h4>
       </div>
     </div>

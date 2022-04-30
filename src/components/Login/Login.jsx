@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import { maxLengthCreator, required } from '../../utils/validators';
 import { Input } from '../Common/FormsControls/FormsControl';
+import { message } from 'antd';
 
 const maxLength25 = maxLengthCreator(25);
 const maxLength255 = maxLengthCreator(255);
@@ -15,7 +16,7 @@ const LoginForm = props => {
         <div className={m.loginBlock}>
           <h1 className={m.inputLogin}>Login</h1>
           <Field
-            className={m.loginFields}
+            // className={m.loginFields}
             placeholder={'login'}
             name={'login'}
             component={Input}
@@ -23,7 +24,7 @@ const LoginForm = props => {
           />
           {/* <div className={m.textLogin}> */}
           <Field
-            className={m.loginFields}
+            // className={m.loginFields}
             type={'password'}
             placeholder={'password'}
             name={'password'}
@@ -35,9 +36,10 @@ const LoginForm = props => {
             <Field type={'checkbox'} name={'rememberMe'} component={'input'} /> remember me
           </div>
           <div>
-            <button className={m.buttonSend}>Login</button>
+            {/* <button className={m.buttonSend}>Login</button> */}
+            <button>Login</button>
           </div>
-          {/* <div>{props.error ? message.error('error!') : ''}</div> */}
+          <div>{props.error ? message.error('wrong login or password') : ''}</div>
         </div>
       </div>
     </form>

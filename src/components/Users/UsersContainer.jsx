@@ -51,5 +51,5 @@ export default compose(
     getUsers,
   }),
   withRouter,
-  withAuthRedirect,
+  // withAuthRedirect,
 )(UsersAPIComponent);

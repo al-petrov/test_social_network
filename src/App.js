@@ -1,7 +1,6 @@
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import MyMessagesContainer from './components/Messages/MyMessagesContainer';
-import Navbar from './components/Navbar/navbar';
 import { Route } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -9,7 +8,8 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import ProfileContainer from './components/Profile/PofileContainer';
-import { setAuthUserData } from './redux/auth-reducer';
+import { initializeApp } from './redux/app-reducer';
+import { login, deleteErrors } from './redux/auth-reducer';
 import 'antd/dist/antd.css';
 
 import { Button, Layout, Menu } from 'antd';
@@ -20,15 +20,21 @@ import { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import Preloader from './components/Common/Preloader/Preloader';
+import LoginAntd from './components/Login/LoginAntd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 class App extends Component {
   componentDidMount() {
-    this.props.setAuthUserData();
+    this.props.initializeApp();
   }
 
   render() {
+    if (!this.props.initialaized) {
+      return <Preloader />;
+    }
+
     return (
       <Layout>
         <Header className="header" style={{ padding: 0, minHeight: '7vh' }}>
@@ -58,8 +64,14 @@ class App extends Component {
                 <NavLink to="/users">Users</NavLink>
               </Menu.Item>
               <Menu.Item key="4" icon={<UserOutlined />}>
+                <NavLink to="/foto">Foto</NavLink>
+              </Menu.Item>
+              <Menu.Item key="5" icon={<UserOutlined />}>
                 <NavLink to="/settings">Settings</NavLink>
               </Menu.Item>
+              {/* <Menu.Item key="4" icon={<UserOutlined />}>
+                <NavLink to="/settings">Settings</NavLink>
+              </Menu.Item> */}
             </Menu>
           </Sider>
           {/* <Header className="header" style={{ padding: 0 }} /> */}
@@ -71,7 +83,8 @@ class App extends Component {
               <Route path="/music" render={() => <Music />} />
               <Route path="/settings" render={() => <SettingsContainer />} />
               <Route path="/users" render={() => <UsersContainer />} />
-              <Route path="/login" render={() => <LoginContainer />} />
+              <Route path="/foto" render={() => <div />} />
+              <Route path="/login" render={() => <LoginAntd {...this.props} />} />
             </div>
           </Content>
           {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
@@ -82,4 +95,11 @@ class App extends Component {
   }
 }
 
-export default compose(withRouter, connect(null, { setAuthUserData }))(App);
+const mapStateToProps = state => ({
+  initialaized: state.app.initialaized,
+  isAuth: state.auth.isAuth,
+  redirectAddress: state.auth.redirectAddress,
+  loginErrors: state.auth.errors,
+});
+
+export default compose(withRouter, connect(mapStateToProps, { initializeApp, deleteErrors, login }))(App);

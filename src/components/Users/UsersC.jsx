@@ -2,6 +2,7 @@ import React from 'react';
 import u from './Users.module.css';
 import NoFoto from '../Common/Foto/NoFoto.png';
 import { NavLink } from 'react-router-dom';
+import { Pagination } from 'antd';
 
 const Users = props => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -9,6 +10,11 @@ const Users = props => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+
+  let pageChange = pageNumber => {
+    props.onPageChanged(pageNumber);
+  };
+
   return (
     <div>
       {/* <button onClick={this.getUsers}>Get Users</button> */}
@@ -43,6 +49,16 @@ const Users = props => {
         </div>
       ))}
       <div className={u.pagesBar}>
+        <Pagination
+          size="small"
+          defaultCurrent={1}
+          total={props.totalUsersCount}
+          onChange={pageChange}
+          defaultPageSize={5}
+        />
+      </div>
+
+      {/* <div className={u.pagesBar}>
         {pages.map(p => {
           return (
             <span
@@ -55,7 +71,7 @@ const Users = props => {
             </span>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };
