@@ -80,6 +80,12 @@ export const unsetAuthUserDataAC = () => ({
   type: UNSET_USER_DATA,
 });
 
+export const getWebdavConfig = () => dispatch => {
+  return authAPI.webdavConnect().then(response => {
+    console.log(response);
+  });
+};
+
 export const setAuthUserData = () => dispatch => {
   return authAPI.auth().then(response => {
     if (response && response.isLogined) {
@@ -112,6 +118,10 @@ export const updateUserData = (myID, country, username, img, userstatus) => {
       }
     });
   };
+};
+
+export const uploadImage = file => {
+  return usersAPI.uploadImage(file);
 };
 
 export default authReducer;

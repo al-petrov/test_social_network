@@ -3,7 +3,13 @@ import * as axios from 'axios';
 const instance = axios.create({
   withCredentials: true,
   //baseURL: 'http://barabulka.site:8080/api',
+  //headers: { Authorization: 'Basic d2VidXNlcjoxMjM0NTZ5dHJld3E=' },
   baseURL: 'https://barabulka.site/api/api/',
+});
+
+const webdavInstance = axios.create({
+  baseURL: 'https://barabulka.site/webdav/',
+  headers: { Authorization: 'Basic d2VidXNlcjoxMjM0NTZ5dHJld3E=' },
 });
 
 export const usersAPI = {
@@ -51,6 +57,12 @@ export const usersAPI = {
         console.log(err.response);
       });
   },
+
+  uploadImage(file) {
+    return webdavInstance.put('test111').then(response => {
+      return 'ok';
+    });
+  },
 };
 
 export const authAPI = {
@@ -70,8 +82,22 @@ export const authAPI = {
 
   login(login, password, rememberMe) {
     return instance.post(`login`, { login, password }).then(response => {
+      // webdavInstance.get('config.txt');
       return response.data;
     });
+  },
+
+  webdavConnect() {
+    return webdavInstance
+      .get('config.txt')
+      .then(response => {
+        return true;
+      })
+      .catch(err => {
+        console.log('hi');
+        console.log(err.response);
+        return false;
+      });
   },
 };
 

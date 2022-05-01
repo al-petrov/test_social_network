@@ -8,7 +8,7 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import ProfileContainer from './components/Profile/PofileContainer';
-import { initializeApp } from './redux/app-reducer';
+import { initializeApp, connectWebdav } from './redux/app-reducer';
 import { login, deleteErrors } from './redux/auth-reducer';
 import 'antd/dist/antd.css';
 
@@ -28,10 +28,11 @@ const { Header, Content, Footer, Sider } = Layout;
 class App extends Component {
   componentDidMount() {
     this.props.initializeApp();
+    this.props.connectWebdav();
   }
 
   render() {
-    if (!this.props.initialaized) {
+    if (!this.props.initialaized || !this.props.webdav) {
       return <Preloader />;
     }
 
@@ -97,9 +98,13 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   initialaized: state.app.initialaized,
+  webdav: state.app.webdav,
   isAuth: state.auth.isAuth,
   redirectAddress: state.auth.redirectAddress,
   loginErrors: state.auth.errors,
 });
 
-export default compose(withRouter, connect(mapStateToProps, { initializeApp, deleteErrors, login }))(App);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { initializeApp, deleteErrors, login, connectWebdav }),
+)(App);

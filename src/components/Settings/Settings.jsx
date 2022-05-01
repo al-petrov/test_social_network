@@ -58,7 +58,7 @@ const SettingsForm = props => {
               component={Input}
               validate={[maxLengthCreator255]}
             />
-            <SettingsImageUploader />
+            <SettingsImageUploader uploadImage={props.uploadImage} />
           </div>
           <button className={m.buttonSend}>ENTER</button>
         </div>
@@ -88,6 +88,7 @@ const Settings = props => {
     <div>
       <SettingsReduxForm
         onSubmit={onSubmit}
+        uploadImage={props.uploadImage}
         initialValues={{
           login: props.login,
           username: props.userName,
