@@ -7,6 +7,7 @@ const UNSET_USER_DATA = 'UNSET-USER-DATA';
 const SET_REDIRECT_ADDRESS = 'SET-REDIRECT-ADDRESS';
 const ADD_ERROR = 'ADD-ERROR';
 const DELETE_ERROR = 'DELETE-ERROR';
+const NEW_PROFILE_IMAGE = 'NEW-PROFILE-IMAGE';
 
 const initialState = {
   isAuth: false,
@@ -48,6 +49,11 @@ const authReducer = (state = initialState, action) => {
         //   ? state.errors.splice(state.errors.indexOf(action.error))
         //   : state.errors,
       };
+    case NEW_PROFILE_IMAGE:
+      return {
+        ...state,
+        userImg: action.image,
+      };
     default:
       return state;
   }
@@ -79,12 +85,6 @@ export const setAuthUserDataAC = (myID, login, userName, userImg, userStatus) =>
 export const unsetAuthUserDataAC = () => ({
   type: UNSET_USER_DATA,
 });
-
-export const getWebdavConfig = () => dispatch => {
-  return authAPI.webdavConnect().then(response => {
-    console.log(response);
-  });
-};
 
 export const setAuthUserData = () => dispatch => {
   return authAPI.auth().then(response => {
@@ -121,7 +121,15 @@ export const updateUserData = (myID, country, username, img, userstatus) => {
 };
 
 export const uploadImage = file => {
-  return usersAPI.uploadImage(file);
+  return dispatch => usersAPI.uploadImage(file);
+};
+
+export const newProfileImageAC = image => ({ type: NEW_PROFILE_IMAGE, image });
+
+export const newProfileImage = image => {
+  return dispatch => {
+    dispatch(newProfileImageAC(image));
+  };
 };
 
 export default authReducer;

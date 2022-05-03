@@ -9,7 +9,7 @@ const SET_USER_STATUS = 'SET-USER-STATUS';
 
 let initialState = {
   posts: [],
-  profile: null,
+  profile: { img: undefined },
   myID: null,
   isAuth: false,
   userImg: undefined,
@@ -24,6 +24,7 @@ const profileReducer = (state = initialState, action) => {
         text: action.newPostText,
         userimg: state.profile.img,
         likeCount: 0,
+        date: action.date,
       };
       return {
         ...state,
@@ -59,10 +60,11 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostAC = newPostText => {
+export const addPostAC = (newPostText, date) => {
   return {
     type: ADD_POST,
     newPostText,
+    date,
   };
 };
 
@@ -93,8 +95,8 @@ export const setUserPosts = userId => {
 export const addPost = (myID, newPostText) => {
   return dispatch => {
     dispatch(addPostInProgress(true));
-    profileAPI.addPost(myID, newPostText, 0).then(isOk => {
-      dispatch(addPostAC(newPostText));
+    profileAPI.addPost(myID, newPostText, 0).then(response => {
+      dispatch(addPostAC(response.data.posttext, response.data.date));
       dispatch(addPostInProgress(false));
     });
   };

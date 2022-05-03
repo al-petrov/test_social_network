@@ -23,7 +23,13 @@ let AddNewPostFormRedux = reduxForm({ form: 'ProfileAddNewPostForm' })(AddNewPos
 
 const MyPosts = props => {
   let allPosts = props.posts.map(p => (
-    <Post message={p.text || ''} likeCount={p.likecount} userImg={p.userimg || undefined} />
+    <Post
+      message={p.text || ''}
+      likeCount={p.likecount}
+      userImg={p.userimg || undefined}
+      date={p.date}
+      userName={props.userName}
+    />
   ));
 
   let inputArea = props.profile ? props.profile.userId == props.myID : false;

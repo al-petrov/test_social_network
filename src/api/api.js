@@ -1,15 +1,10 @@
 import * as axios from 'axios';
 
-const instance = axios.create({
+export const instance = axios.create({
   withCredentials: true,
   //baseURL: 'http://barabulka.site:8080/api',
   //headers: { Authorization: 'Basic d2VidXNlcjoxMjM0NTZ5dHJld3E=' },
   baseURL: 'https://barabulka.site/api/api/',
-});
-
-const webdavInstance = axios.create({
-  baseURL: 'https://barabulka.site/webdav/',
-  headers: { Authorization: 'Basic d2VidXNlcjoxMjM0NTZ5dHJld3E=' },
 });
 
 export const usersAPI = {
@@ -57,12 +52,6 @@ export const usersAPI = {
         console.log(err.response);
       });
   },
-
-  uploadImage(file) {
-    return webdavInstance.put('test111').then(response => {
-      return 'ok';
-    });
-  },
 };
 
 export const authAPI = {
@@ -85,19 +74,6 @@ export const authAPI = {
       // webdavInstance.get('config.txt');
       return response.data;
     });
-  },
-
-  webdavConnect() {
-    return webdavInstance
-      .get('config.txt')
-      .then(response => {
-        return true;
-      })
-      .catch(err => {
-        console.log('hi');
-        console.log(err.response);
-        return false;
-      });
   },
 };
 
@@ -163,9 +139,10 @@ export const profileAPI = {
         userId,
         postText,
         likeCount,
+        date: new Date(),
       })
       .then(response => {
-        return true;
+        return response;
       })
       .catch(err => {
         console.log('hi');
@@ -184,6 +161,42 @@ export const profileAPI = {
       })
       .then(response => {
         return true;
+      })
+      .catch(err => {
+        console.log('hi');
+        console.log(err.response);
+      });
+  },
+};
+
+export const fileAPI = {
+  getFiles(userId, currentPage, pageSize, dataType) {
+    return instance
+      .get(`files?user_id=${userId}&current=${currentPage}&size=${pageSize}&dataType=${dataType}`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(err => {
+        console.log('hi');
+        console.log(err.response);
+      });
+  },
+
+  addFile(ownerId, type, fileName, fileDesc, uploadDate, fileUrl, previewUrl, lastModified, fileSize) {
+    return instance
+      .post(`files`, {
+        ownerId,
+        type,
+        fileName,
+        fileDesc,
+        uploadDate,
+        fileUrl,
+        previewUrl,
+        lastModified,
+        fileSize,
+      })
+      .then(response => {
+        return response;
       })
       .catch(err => {
         console.log('hi');

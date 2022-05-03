@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import { maxLengthCreator, required } from '../../utils/validators';
 import { Input } from '../Common/FormsControls/FormsControl';
+// import { Image } from 'react-native';
 import { Image } from 'antd';
 import SettingsImageUploader from './SettingsImageUploader';
 
@@ -58,9 +59,9 @@ const SettingsForm = props => {
               component={Input}
               validate={[maxLengthCreator255]}
             />
-            <SettingsImageUploader uploadImage={props.uploadImage} />
+            <SettingsImageUploader newProfileImage={props.newProfileImage} addFile={props.addFile} myID={props.myID} />
           </div>
-          <button className={m.buttonSend}>ENTER</button>
+          <button className={m.buttonSend}>SAVE</button>
         </div>
       </div>
     </form>
@@ -88,7 +89,10 @@ const Settings = props => {
     <div>
       <SettingsReduxForm
         onSubmit={onSubmit}
-        uploadImage={props.uploadImage}
+        newProfileImage={props.newProfileImage}
+        addFile={props.addFile}
+        enableReinitialize={true}
+        myID={props.myID}
         initialValues={{
           login: props.login,
           username: props.userName,

@@ -1,8 +1,11 @@
-.content{
+.content {
   /* background-color: aqua; */
 }
 
-.postsBlock{
-  margin: 0px 0px 0px 10px;
+.postsBlock {
+  /* margin: 0px 0px 0px 10px; */
+  position: relative;
+  left: 3vw;
+  top: -150px;
   /* padding: 10px; */
 }
